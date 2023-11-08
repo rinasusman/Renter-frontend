@@ -13,6 +13,7 @@ import HomeVerified from './pages/Admin/HomeVerified';
 import SIngleHome from './pages/Clients/SIngleHome';
 import Favourite from './pages/Clients/Favourite';
 import CheckoutPage from './pages/Clients/CheckoutPage';
+import HomeEdit from './pages/Clients/HomeEdit';
 
 function App() {
   const token = localStorage.getItem('admintoken')
@@ -29,7 +30,7 @@ function App() {
           <Route exact path="/lsitinfo/:id" element={<SIngleHome />} />
           <Route exact path="/favorites" element={<Favourite />} />
           <Route exact path="/checkout" element={<CheckoutPage />} />
-
+          <Route exact path="/homeedit" element={<HomeEdit />} />
 
 
           <Route exact path="/dashboard" element={token ? < AdminHome /> : <Navigate to={'/admin'} />} />

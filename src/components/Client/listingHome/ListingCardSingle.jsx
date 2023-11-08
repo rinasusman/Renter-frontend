@@ -1,11 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import Button from '../../Button'
 import userAxios from '../../../Axios/guestAxios';
+import { useNavigate } from 'react-router-dom';
 
 const ListingCardSingle = ({ data, onDelete }) => {
 
     const { location, category, price, imageSrc } = data;
+    const navigate = useNavigate();
 
+    const handleEdit = () => {
+
+        navigate('/homeedit', { state: { itemData: data } })
+    }
     const handleDelete = () => {
         const tokens = localStorage.getItem('usertoken');
         const headers = {
@@ -73,8 +79,10 @@ const ListingCardSingle = ({ data, onDelete }) => {
                 </div>
                 <div className="flex justify-between gap-2">
                     <Button
+                        key={data._id}
                         outline
                         label="Edit"
+                        onClick={handleEdit}
                     />
                     <Button
                         key={data._id}

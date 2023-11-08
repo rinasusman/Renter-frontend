@@ -4,7 +4,7 @@ import ListingInfo from './ListingInfo'
 import { useParams } from 'react-router-dom';
 import userAxios from "../../../Axios/guestAxios.js";
 import ListingReservation from './ListingReservation';
-
+;
 const Listsingle = () => {
 
     const { id } = useParams();
@@ -60,6 +60,7 @@ const Listsingle = () => {
                             data={listingData}
                         />
                     </div>
+
                 </div>
             </div>
         </div>
