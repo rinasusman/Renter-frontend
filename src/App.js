@@ -7,6 +7,12 @@ import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import UserForm from './pages/Admin/UserForm';
 import CategoryList from './pages/Admin/CategoryList';
+import Property from './pages/Clients/Property';
+import HomeVerify from './pages/Admin/HomeVerify';
+import HomeVerified from './pages/Admin/HomeVerified';
+import SIngleHome from './pages/Clients/SIngleHome';
+import Favourite from './pages/Clients/Favourite';
+import CheckoutPage from './pages/Clients/CheckoutPage';
 
 function App() {
   const token = localStorage.getItem('admintoken')
@@ -19,9 +25,18 @@ function App() {
 
           <Route path="/admin" element={<LoginForm />} />
           <Route exact path="/" element={<Home />} />
+          <Route exact path="/myproperties" element={<Property />} />
+          <Route exact path="/lsitinfo/:id" element={<SIngleHome />} />
+          <Route exact path="/favorites" element={<Favourite />} />
+          <Route exact path="/checkout" element={<CheckoutPage />} />
+
+
+
           <Route exact path="/dashboard" element={token ? < AdminHome /> : <Navigate to={'/admin'} />} />
           <Route exact path="/userlist" element={<UserForm />} />
           <Route exact path="/category" element={<CategoryList />} />
+          <Route exact path="/homeverification" element={<HomeVerify />} />
+          <Route exact path="/homes" element={<HomeVerified />} />
         </Routes>
 
       </Router>

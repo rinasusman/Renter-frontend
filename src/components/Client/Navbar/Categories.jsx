@@ -3,14 +3,14 @@ import CategoryBox from '../../CategoryBox';
 import Container from '../../Container';
 import { TbBeach, TbMountain, TbPool } from 'react-icons/tb';
 import {
-    GiBarn,
-    GiBoatFishing,
-    GiCactus,
-    GiCastle,
-    GiCaveEntrance,
-    GiForestCamp,
-    GiIsland,
-    GiWindmill
+  GiBarn,
+  GiBoatFishing,
+  GiCactus,
+  GiCastle,
+  GiCaveEntrance,
+  GiForestCamp,
+  GiIsland,
+  GiWindmill
 } from 'react-icons/gi';
 import { FaSkiing } from 'react-icons/fa';
 import { BsSnow } from 'react-icons/bs';
@@ -95,12 +95,17 @@ export const categories = [
   },
 ];
 
-function Categories() {
+function Categories({ onCategorySelect }) {
   const searchParams = new URLSearchParams(window.location.search);
   const category = searchParams.get('category');
   const pathname = window.location.pathname;
   const isMainPage = pathname === '/';
 
+
+  const handleCategorySelect = (selectedCategory) => {
+    onCategorySelect(selectedCategory);
+  }
+  console.log(onCategorySelect, "........................")
   if (!isMainPage) {
     return null;
   }
@@ -114,6 +119,7 @@ function Categories() {
             label={item.label}
             icon={item.icon}
             selected={category === item.label}
+            onClick={() => handleCategorySelect(item.label)}
           />
         ))}
       </div>

@@ -9,6 +9,7 @@ const Input = ({
     formatPrice,
     required,
     register,
+    value, onChange,
     errors
 }) => {
     return (
@@ -30,6 +31,8 @@ const Input = ({
                 {...register(id, { required })}
                 placeholder=" "
                 type={type}
+                value={value}
+                onChange={onChange}
                 className={`
                 peer
                 w-full

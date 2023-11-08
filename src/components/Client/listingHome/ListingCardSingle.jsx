@@ -1,15 +1,29 @@
 import React, { useEffect, useState } from 'react'
 import Button from '../../Button'
-import userAxios from "../../../Axios/guestAxios.js";
-import HeartButton from '../../HeartButton';
-import { Link } from 'react-router-dom';
+import userAxios from '../../../Axios/guestAxios';
 
-const ListingCard = ({ data, isHeartFilled, toggleHeart }) => {
+const ListingCardSingle = ({ data, onDelete }) => {
 
     const { location, category, price, imageSrc } = data;
-    console.log(data._id, "llllllllllll")
 
-
+    const handleDelete = () => {
+        const tokens = localStorage.getItem('usertoken');
+        const headers = {
+            'Authorization': `Bearer ${tokens}`,
+            'Content-Type': 'application/json',
+        };
+        if (headers.Authorization) {
+            userAxios.delete(`/listdelete/${data._id}`, { headers })
+                .then(response => {
+                    // Update the frontend state after a successful delete
+                    onDelete(data._id);
+                    window.location.reload();
+                })
+                .catch(error => {
+                    console.error("Error deleting item: ", error);
+                });
+        }
+    };
 
     return (
 
@@ -40,17 +54,12 @@ const ListingCard = ({ data, isHeartFilled, toggleHeart }) => {
             top-3
             right-3
           ">
-                        <HeartButton listingId={data._id} isFilled={isHeartFilled} toggleHeart={toggleHeart} />
 
                     </div>
                 </div>
-                <Link to={`/lsitinfo/${data._id}`} key={data._id}>
-                    <div className="font-semibold text-lg">
-
-                        {location}
-
-                    </div>
-                </Link>
+                <div className="font-semibold text-lg">
+                    {location}
+                </div>
                 <div className="font-light text-neutral-500">
                     {category}
                 </div>
@@ -62,6 +71,17 @@ const ListingCard = ({ data, isHeartFilled, toggleHeart }) => {
                     <div className="font-light">night</div>
 
                 </div>
+                <div className="flex justify-between gap-2">
+                    <Button
+                        outline
+                        label="Edit"
+                    />
+                    <Button
+                        key={data._id}
+                        label="Delete"
+                        onClick={handleDelete}
+                    />
+                </div>
 
 
 
@@ -72,4 +92,4 @@ const ListingCard = ({ data, isHeartFilled, toggleHeart }) => {
     )
 }
 
-export default ListingCard
+export default ListingCardSingle

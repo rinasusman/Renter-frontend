@@ -58,20 +58,26 @@ const LoginModal = () => {
     console.log(data, ">>>>>>>>>>>>>>>>>>>>>>>>>>")
     setIsLoading(true);
 
-
-
     try {
 
       const res = await login({ data }).unwrap();
 
-      dispatch(setUserLogin({ ...res }));
-      console.log("res>>>>>>>>>>", res)
+
 
       if (res.userSignUp.message === 'You are logged') {
+        dispatch(setUserLogin({ ...res }));
+
+        const tokens = res.userSignUp.token
+        localStorage.setItem('usertoken', tokens)
+
         loginModal.onClose();
 
         toast.success(res.userSignUp.message)
         navigate("/");
+      }
+      else if (res.message === 'User not registered') {
+        // User is not registered
+        toast.error("User not registered. Please sign up.");
       }
       else {
         reset();

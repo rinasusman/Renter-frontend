@@ -1,24 +1,24 @@
-import React, { useEffect, useState } from 'react';
-import useCategoryModal from '../../Hooks/useCategoryModal';
+import React, { useEffect, useState } from 'react'
+import Heading from '../Heading'
 import adminAxios from '../../Axios/adminAxios';
-import Heading from '../Heading';
+const Homes = (
+    {
+        title = "Verified Home  List is Empty",
+        subtitle = ".",
 
-const Catogeriy = ({
-    title = "Categories not found",
-    subtitle = "Please add Categories.",
+    }
+) => {
 
-}) => {
-    const [CategoryDetails, setCategoryDetails] = useState([]);
+
+    const [HomeDetails, setHomeDetails] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 5;
 
-    const categoryModal = useCategoryModal();
-
-    const fetchCategoryDetails = async () => {
+    const fetchHomeDetails = async () => {
         try {
-            let response = await adminAxios.get('/getCategoryList');
+            let response = await adminAxios.get('/getHomeListverified');
             if (Array.isArray(response.data)) {
-                setCategoryDetails(response.data);
+                setHomeDetails(response.data);
             }
         } catch (e) {
             console.log('error', e.message);
@@ -26,35 +26,22 @@ const Catogeriy = ({
     };
 
     useEffect(() => {
-        fetchCategoryDetails();
+        fetchHomeDetails();
     }, []);
-
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    const currentItems = CategoryDetails.slice(indexOfFirstItem, indexOfLastItem);
+    const currentItems = HomeDetails.slice(indexOfFirstItem, indexOfLastItem);
 
-    // Calculate the starting serial number based on the current page
-    const startSerialNumber = (currentPage - 1) * itemsPerPage + 1;
-
-    const paginate = (action) => {
-        if (action === 'next') {
-            setCurrentPage(currentPage + 1);
-        } else if (action === 'previous') {
-            setCurrentPage(currentPage - 1);
-        }
+    const paginate = (pageNumber) => {
+        setCurrentPage(pageNumber);
     };
-
     return (
         <div className="pt-[25px] px-[25px] bg-[#FBF9FC]">
             <div className="flex items-center justify-between">
-                <h1 className="text-[#5a5c69] text-[28px] leading-[34px] font-normal">CATEGORY LIST</h1>
-                <button
-                    onClick={categoryModal.onOpen}
-                    className="bg-rose-500 h-[32px] rounded-[3px] text-white flex items-center px-[30px] cursor-pointer">
-                    Add category
-                </button>
+                <h1 className="text-[#5a5c69] text-[28px] leading-[34px] font-normal">Home List </h1>
+
             </div>
-            {CategoryDetails.length > 0 ? (
+            {HomeDetails.length > 0 ? (
                 < div className="flex flex-col">
                     <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
                         <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">
@@ -72,23 +59,26 @@ const Catogeriy = ({
                                                 DESCRIPTION
                                             </th>
                                             <th scope="col" className="px-6 py-4">
-                                                ACTION
+
                                             </th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {currentItems.map((category, index) => (
-                                            <tr className="border-b dark:border-neutral-500" key={category._id}>
-                                                <td className="whitespace-nowrap px-6 py-4 font-medium">{startSerialNumber + index}</td>
-                                                <td className="whitespace-nowrap text-black font-medium px-6 py-4">
-                                                    {category.name}
+                                        {currentItems?.map((home, index) => (
+                                            <tr className="border-b dark:border-neutral-500" >
+                                                <td className="whitespace-nowrap px-6 py-4 font-medium">
+                                                    {index + 1}
                                                 </td>
                                                 <td className="whitespace-nowrap text-black font-medium px-6 py-4">
-                                                    {category.description}
+                                                    {home.title}
+                                                </td>
+                                                <td className="whitespace-nowrap text-black font-medium px-6 py-4">
+                                                    {home.location
+                                                    }
                                                 </td>
                                                 <td className="whitespace-nowrap px-2 py-2">
                                                     <button className="bg-red-500 rounded-[3px] px-3 h-[20px] text-white cursor-pointer font-medium">
-                                                        EDIT
+                                                        DETAILS
                                                     </button>
                                                 </td>
                                             </tr>
@@ -101,30 +91,32 @@ const Catogeriy = ({
                     </div>
                     <div className="mt-4 flex justify-center">
                         <button
-                            onClick={() => paginate('previous')}
+                            onClick={() => paginate(currentPage - 1)}
                             disabled={currentPage === 1}
                             className="bg-rose-500 text-white rounded-md px-4 py-2 mr-2"
                         >
                             Previous
                         </button>
                         <button
-                            onClick={() => paginate('next')}
-                            disabled={indexOfLastItem >= CategoryDetails.length}
+                            onClick={() => paginate(currentPage + 1)}
+                            disabled={indexOfLastItem >= HomeDetails.length}
                             className="bg-rose-500 text-white rounded-md px-4 py-2"
                         >
                             Next
                         </button>
                     </div>
-                </div>) : (
+                </div>
+
+            ) : (
                 <div
                     className="
-                h-[60vh]
-                flex
-                flex-col
-                gap-2
-                justify-center
-                items-center
-              ">
+            h-[60vh]
+            flex
+            flex-col
+            gap-2
+            justify-center
+            items-center
+          ">
                     <Heading
                         center
                         title={title}
@@ -132,12 +124,10 @@ const Catogeriy = ({
                     />
 
                 </div>
+            )}
 
-            )
-            }
-            {/* {CategoryDetails.length === 0 && <h2>Empty list</h2>} */}
         </div >
-    );
-};
+    )
+}
 
-export default Catogeriy;
+export default Homes

@@ -115,6 +115,7 @@ const RegisterModal = () => {
                         const strengthColor = calculatePasswordStrengthColor(password);
                         setPasswordStrengthColor(strengthColor);
                     }}
+
                 />
                 <div
                     className="absolute h-1 rounded"
@@ -145,7 +146,7 @@ const RegisterModal = () => {
     const footerContent = (
         <div className="flex flex-col gap-2 mt-2">
             <hr />
-            <Button outline label="Continue with Google" icon={FcGoogle} />
+            {/* <Button outline label="Continue with Google" icon={FcGoogle} /> */}
             <div className="text-neutral-500 text-center mt-4 font-light">
                 <p>
                     Already have an account?

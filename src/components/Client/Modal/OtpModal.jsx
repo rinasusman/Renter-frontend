@@ -57,9 +57,10 @@ const OtpModal = () => {
         };
     }, [timer, otpModal]);
 
-    const handleResend = () => {
+    const handleResend = async (data) => {
         // Implement the logic to resend the OTP here.
         // You can reset the timer and trigger a new OTP request.
+        const otpSend = await userAxios.post('/sendotp', data);
         setTimer(120);
         setShowResendLink(false);
     };

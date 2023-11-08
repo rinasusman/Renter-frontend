@@ -40,13 +40,22 @@ const UserMenu = ({ }) => {
     // Open the sign-up modal by calling the onOpen function from the registerModal
     loginModal.onOpen();
   };
+  const handlePropertyClick = () => {
+    // Open the sign-up modal by calling the onOpen function from the registerModal
+    navigate("/myproperties/")
+  };
+  const handleFavoritesClick = () => {
+    // Open the sign-up modal by calling the onOpen function from the registerModal
+    navigate("/favorites")
+  };
 
   const logoutHandler = async () => {
     try {
       await logoutApiCall().unwrap();
       dispatch(setUserLogout());
-      toast.success("You are Logged out")
-      loginModal.onOpen();
+
+      navigate('/')
+
     } catch (err) {
       console.log(err)
     }
@@ -99,7 +108,7 @@ const UserMenu = ({ }) => {
         >
           <AiOutlineMenu />
           <div className="hidden md:block">
-            <Avatar src="./images/placeholder.jpg" />
+            <Avatar src="/images/placeholder.jpg" />
           </div>
         </div>
       </div>
@@ -123,9 +132,9 @@ const UserMenu = ({ }) => {
             {userToken && userToken.userSignUp && userToken.userSignUp.message === 'You are logged' ? (
               <>
                 <MenuItem label="My trips" />
-                <MenuItem label="My favorites" />
+                <MenuItem label="My favorites" onClick={handleFavoritesClick} />
                 <MenuItem label="My reservations" />
-                <MenuItem label="My properties" />
+                <MenuItem label="My properties" onClick={handlePropertyClick} />
                 <MenuItem label="homebnb my home" onClick={rentModal.onOpen} />
                 <hr />
                 <MenuItem label="Logout" onClick={logoutHandler} />

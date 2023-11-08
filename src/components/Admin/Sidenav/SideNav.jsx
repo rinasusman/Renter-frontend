@@ -52,7 +52,7 @@ const SideNav = () => {
         </div>
         <div className='flex items-center gap-[15px] py-[20px]  border-b-[1px] border-[#EDEDED]/[0.3]'>
           <BiHomeSmile color='white' />
-          <p className='text-white text-[14px] font-bold leading-[20px] cursor-pointer'>Homes</p>
+          <p className='text-white text-[14px] font-bold leading-[20px] cursor-pointer' onClick={() => { navigate("/homes") }}>Homes</p>
         </div>
         <div className='flex items-center gap-[15px] py-[20px]  border-b-[1px] border-[#EDEDED]/[0.3]'>
           <TbBrandBooking color='white' />
@@ -60,7 +60,7 @@ const SideNav = () => {
         </div>
         <div className='flex items-center gap-[15px] py-[20px]  border-b-[1px] border-[#EDEDED]/[0.3]'>
           <MdOutlineVerified color='white' />
-          <p className='text-white text-[14px] font-bold leading-[20px] cursor-pointer'>Verification</p>
+          <p className='text-white text-[14px] font-bold leading-[20px] cursor-pointer' onClick={() => { navigate("/homeverification") }}>Verification</p>
         </div>
         <div className='flex items-center gap-[15px] py-[20px]  border-b-[1px] border-[#EDEDED]/[0.3]'>
           <AiOutlineLogout color='white' />

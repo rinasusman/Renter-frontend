@@ -1,6 +1,7 @@
 import { IconType } from "react-icons";
 
 const CategoryInput = ({
+
   icon: Icon,
   label,
   selected,

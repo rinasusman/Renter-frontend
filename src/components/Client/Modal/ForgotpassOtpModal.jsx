@@ -12,14 +12,14 @@ import Heading from '../../Heading.jsx';
 import Modal from './Modal.jsx';
 import Input from '../inputs/Input.jsx';
 
-import useLoginModal from '../../../Hooks/useLoginModal.js';
 import useForgotpassOtpModal from '../../../Hooks/useForgotpassOtpModal.js';
+import useResetpassModal from '../../../Hooks/useResetpassModal.js';
 
 const ForgotpassOtpModal = () => {
 
 
     const otpModal = useForgotpassOtpModal();
-    const loginModal = useLoginModal();
+    const resetpassModal = useResetpassModal();
     const [timer, setTimer] = useState(120);
     const [errorMessage, setErrorMessage] = useState("");
     const [isLoading, setIsLoading] = useState(false);
@@ -70,10 +70,10 @@ const ForgotpassOtpModal = () => {
             otp: data.otp
         }
         try {
-            const response = await userAxios.post("/verifyotp", payload)
+            const response = await userAxios.post("/verifyotpfogot", payload)
             if (response.data.success) {
                 otpModal.onClose();
-                loginModal.onOpen();
+                resetpassModal.onOpen();
             }
             else {
                 setErrorMessage(response.data.message);
