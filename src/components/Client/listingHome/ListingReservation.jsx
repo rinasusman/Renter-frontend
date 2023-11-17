@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import Button from '../../Button'
-import DateCalnder from '../inputs/DateCalnder'
 import DateCalendar from '../inputs/DateCalnder'
 import { Link } from 'react-router-dom'
 
 const ListingReservation = ({ data }) => {
+
     const [selectedRange, setSelectedRange] = useState(null);
     if (!data) {
         // Handle the case where 'data' is null or undefined
@@ -27,7 +27,7 @@ const ListingReservation = ({ data }) => {
                 imageSrc: data.imageSrc,
                 totalNights: nights,
             };
-
+            console.log(reservationData, "reservationData:");
             return (
                 <Link to="/checkout" state={{ reservationData }}>
                     <Button label="Reserve" />

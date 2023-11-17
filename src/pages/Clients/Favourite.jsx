@@ -7,7 +7,6 @@ import EmailModal from '../../components/Client/Modal/EmailModal'
 import OtpModal from '../../components/Client/Modal/OtpModal'
 import RegisterModal from '../../components/Client/Modal/RegisterModal'
 import LoginModal from '../../components/Client/Modal/LoginModal'
-import Categories from '../../components/Client/Navbar/Categories'
 import UserMenu from '../../components/Client/Navbar/UserMenu'
 import Navbar from '../../components/Client/Navbar/Navbar'
 

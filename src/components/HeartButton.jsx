@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from 'react';
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { useSelector, useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import useLoginModal from '../Hooks/useLoginModal';
 import userAxios from '../Axios/guestAxios';
 import { setUserLogin, setUserLogout } from '../Redux/container/userAuth.slice';
@@ -11,7 +10,6 @@ const HeartButton = ({ listingId }) => {
     const [isFilled, setIsFilled] = useState(false);
     const userTokens = useSelector((state) => state.auth.userToken);
     const dispatch = useDispatch();
-    const navigate = useNavigate();
     const loginModal = useLoginModal();
     const tokens = localStorage.getItem('usertoken');
 

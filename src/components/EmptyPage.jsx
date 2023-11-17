@@ -6,7 +6,8 @@ import Heading from "./Heading";
 const EmptyPage = ({
     title = "No exact matches",
     subtitle = "Try changing or removing some of your filters.",
-    showReset
+    showReset,
+    onReset
 }) => {
     // const router = useRouter();
 
@@ -31,7 +32,7 @@ const EmptyPage = ({
                     <Button
                         outline
                         label="Remove all filters"
-
+                        onClick={onReset}
                     />
                 )}
             </div>

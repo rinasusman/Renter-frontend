@@ -4,10 +4,12 @@ import Heading from '../../Heading'
 import BookDetails from './BookDetails'
 import ListingInfo from '../listingHome/ListingInfo'
 import PaymentDetails from './PaymentDetails'
+import { useLocation } from 'react-router-dom'
 
 const Checkout = () => {
-
-
+    const location = useLocation();
+    const reservationData = location.state.reservationData;
+    console.log(reservationData, "checkout:");
     return (
         <Container>
             <Heading
@@ -31,7 +33,7 @@ const Checkout = () => {
               mt-6
             "
                     >
-                        <PaymentDetails />
+                        <PaymentDetails data={reservationData} />
                         <div
                             className="
                 order-first 
@@ -41,7 +43,7 @@ const Checkout = () => {
               "
                         >
                             <div className="sticky top-[185px]">
-                                <BookDetails />
+                                <BookDetails data={reservationData} />
                             </div>
                         </div>
                     </div>

@@ -4,9 +4,10 @@ import Avatar from '../../Avatar'
 const ListingInfo = ({ data }) => {
     console.log(data, "nameeeeeeeeeeeeeeeeee");
     if (!data) {
-        return null; // Handle the case when data is not available
+        return null;
     }
     const hostName = data.userId.name || "Host's Name Not Available";
+    const firstLetter = hostName ? hostName.charAt(0).toUpperCase() : "";
     return (
         <div className="col-span-4 flex flex-col gap-8">
             <div className="flex flex-col gap-2">
@@ -20,6 +21,10 @@ const ListingInfo = ({ data }) => {
               gap-2
             "
                 >
+                    <div className="flex items-center justify-center bg-rose-500 rounded-full w-[30px] h-[30px]">
+                        <span className="font-semibold text-2xl text-white">{firstLetter}</span>
+
+                    </div>
                     <div>Hosted by {hostName} </div>
 
                 </div>

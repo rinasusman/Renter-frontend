@@ -3,7 +3,7 @@ import Navbar from '../../components/Client/Navbar/Navbar'
 import UserMenu from '../../components/Client/Navbar/UserMenu'
 import Myproperty from '../../components/Client/Property/Myproperty'
 import RentModal from '../../components/Client/Modal/RentModal'
-import ListingHome from '../../components/Client/listingHome/ListingHome'
+
 
 const Property = () => {
     return (

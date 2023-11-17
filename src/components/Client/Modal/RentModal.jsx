@@ -113,12 +113,12 @@ const RentModal = () => {
       price: priceValue
     }
     const tokens = localStorage.getItem('usertoken')
-    console.log(tokens, "rentttttttttttttttttttttttttttt")
+
     const headers = {
       'Authorization': `Bearer ${tokens}`,
-      'Content-Type': 'application/json', // You can specify the content type
+      'Content-Type': 'application/json',
     };
-    console.log(payload, "ddddddddddddddddddddddddd")
+
     setIsLoading(true);
     try {
       const home = await userAxios.post('/addhome', payload, { headers });

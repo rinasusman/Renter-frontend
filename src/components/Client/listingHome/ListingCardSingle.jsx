@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Button from '../../Button'
 import userAxios from '../../../Axios/guestAxios';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const ListingCardSingle = ({ data, onDelete }) => {
 
@@ -13,22 +14,34 @@ const ListingCardSingle = ({ data, onDelete }) => {
         navigate('/homeedit', { state: { itemData: data } })
     }
     const handleDelete = () => {
-        const tokens = localStorage.getItem('usertoken');
-        const headers = {
-            'Authorization': `Bearer ${tokens}`,
-            'Content-Type': 'application/json',
-        };
-        if (headers.Authorization) {
-            userAxios.delete(`/listdelete/${data._id}`, { headers })
-                .then(response => {
-                    // Update the frontend state after a successful delete
-                    onDelete(data._id);
-                    window.location.reload();
-                })
-                .catch(error => {
-                    console.error("Error deleting item: ", error);
-                });
-        }
+        Swal.fire({
+            title: 'Delete Confirmation',
+            text: 'Are you sure you want to delete this item?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const tokens = localStorage.getItem('usertoken');
+                const headers = {
+                    'Authorization': `Bearer ${tokens}`,
+                    'Content-Type': 'application/json',
+                };
+                if (headers.Authorization) {
+                    userAxios.delete(`/listdelete/${data._id}`, { headers })
+                        .then(response => {
+
+                            onDelete(data._id);
+                            window.location.reload();
+                        })
+                        .catch(error => {
+                            console.error("Error deleting item: ", error);
+                        });
+                }
+            }
+        });
     };
 
     return (

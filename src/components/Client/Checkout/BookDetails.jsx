@@ -1,7 +1,14 @@
 import React from 'react'
 import Button from '../../Button'
 
-const BookDetails = () => {
+const BookDetails = ({ data }) => {
+    const { homeTitle, imageSrc, totalNights, price } = data
+
+
+    const totalamount = data.price * data.totalNights
+    const taxRate = 0.05;
+    const taxAmount = totalamount * taxRate;
+    const total = totalamount + taxAmount
     return (
         <div
             className="
@@ -15,10 +22,11 @@ const BookDetails = () => {
             <div className="
               flex flex-row  h-[120px] gap-1 p-4">
                 <div className="text-2xl font-semibold w-[150px] h-[200px] ">
-                    <img className="rounded-xl" src="/images/img.jpg" alt="" />
+                    <img fill className="rounded-xl " src={imageSrc} alt="" />
                 </div>
                 <div className="font-light text-neutral-600">
-                    Woods - 4BHK Villa in Vagamon with great privacy
+                    {homeTitle}
+
                 </div>
             </div>
             <hr className='ml-4 mr-4' />
@@ -38,13 +46,13 @@ const BookDetails = () => {
 
                 </div>
                 <div className='flex flex-row  text-neutral-600 justify-between'>
-                    <div>₹2,700 x 5 nights</div>
-                    <div>₹13,500</div>
+                    <div>₹{price} x {totalNights} nights</div>
+                    <div>₹{totalamount}</div>
                 </div>
 
                 <div className='flex flex-row  text-neutral-600 justify-between'>
                     <div>Taxes</div>
-                    <div>₹1,620</div>
+                    <div>₹{taxAmount}</div>
                 </div>
 
             </div>
@@ -65,7 +73,7 @@ const BookDetails = () => {
                     Total
                 </div>
                 <div>
-                    ₹17,025.89
+                    ₹{total}
                 </div>
             </div>
         </div >

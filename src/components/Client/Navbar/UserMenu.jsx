@@ -18,6 +18,8 @@ const UserMenu = ({ }) => {
   const { userToken } = useSelector((state) => state.auth)
   console.log(userToken, "token>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
   const name = userToken?.userSignUp?.name || ""
+  const firstLetter = name ? name.charAt(0).toUpperCase() : "";
+  console.log(firstLetter, "fisrtletter:")
   const registerModal = useRegisterModal();
   const loginModal = useLoginModal();
   const rentModal = useRentModal();
@@ -33,16 +35,16 @@ const UserMenu = ({ }) => {
   }, []);
 
   const handleSignUpClick = () => {
-    // Open the sign-up modal by calling the onOpen function from the registerModal
+
     registerModal.onOpen();
   };
   const handleLoginClick = () => {
-    // Open the sign-up modal by calling the onOpen function from the registerModal
+
     loginModal.onOpen();
   };
   const handlePropertyClick = () => {
-    // Open the sign-up modal by calling the onOpen function from the registerModal
-    navigate("/myproperties/")
+
+    navigate("/myproperties")
   };
   const handleFavoritesClick = () => {
     // Open the sign-up modal by calling the onOpen function from the registerModal
@@ -108,7 +110,14 @@ const UserMenu = ({ }) => {
         >
           <AiOutlineMenu />
           <div className="hidden md:block">
-            <Avatar src="/images/placeholder.jpg" />
+            {userToken && userToken.userSignUp && userToken.userSignUp.message === 'You are logged' ? (
+              <div className="flex items-center justify-center bg-rose-500 rounded-full w-[30px] h-[30px]">
+                <span className="font-semibold text-2xl text-white">{firstLetter}</span>
+
+              </div>
+            ) : (
+              <Avatar src="/images/placeholder.jpg" />
+            )}
           </div>
         </div>
       </div>

@@ -6,31 +6,20 @@ function CategoryBox({
   icon: Icon,
   label,
   selected,
+  onClick
 }) {
   const navigate = useNavigate();
   const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
+
 
   const handleClick = useCallback(() => {
-    const currentQuery = {};
-    searchParams.forEach((value, key) => {
-      currentQuery[key] = value;
-    });
+    onClick();
+  }, [onClick]);
 
-    const updatedQuery = {
-      ...currentQuery,
-      category: label,
-    };
 
-    if (searchParams.get('category') === label) {
-      delete updatedQuery.category;
-    }
 
-    searchParams.set('category', label);
 
-    const newSearch = '?' + searchParams.toString();
-    navigate(location.pathname + newSearch);
-  }, [label, navigate, location, searchParams]);
+
 
   return (
     <div

@@ -9,8 +9,8 @@ import ListingHome from "../../components/Client/listingHome/ListingHome";
 import EmailModal from "../../components/Client/Modal/EmailModal";
 import ForgotpassOtpModal from "../../components/Client/Modal/ForgotpassOtpModal";
 import RentModal from "../../components/Client/Modal/RentModal";
-import Myproperty from "../../components/Client/Property/Myproperty";
 import ResetpassModal from "../../components/Client/Modal/ResetpassModal";
+import SearchModal from "../../components/Client/Modal/SearchModal";
 
 
 const Home = () => {
@@ -24,6 +24,7 @@ const Home = () => {
     <>
       <Navbar />
       <UserMenu />
+      <SearchModal />
       <Categories onCategorySelect={handleCategorySelect} />
       <LoginModal />
       <RegisterModal />

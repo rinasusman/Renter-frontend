@@ -3,8 +3,29 @@ import Button from '../../Button'
 import Input from '../inputs/Input'
 import { useForm } from 'react-hook-form';
 import DropDown from '../inputs/DropDown';
+import useRazorpay from 'react-razorpay';
 
-const PaymentDetails = () => {
+const PaymentDetails = ({ data }) => {
+    const [Razorpay] = useRazorpay();
+    const { guestCount, startDate, endDate } = data
+    const startDateObject = new Date(startDate);
+    const day = startDateObject.getDate();
+    const month = startDateObject.toLocaleString('default', { month: 'short' });
+
+    const endDateObject = new Date(endDate);
+    const endday = endDateObject.getDate();
+    const endmonth = endDateObject.toLocaleString('default', { month: 'short' });
+    const formattedStartDate = `${day}-${month}`;
+    const formattedEndDate = `${endday}-${endmonth}`;
+
+
+
+
+    const handleConfirmAndPay = () => { }
+
+
+
+
 
     const {
         register,
@@ -58,13 +79,15 @@ const PaymentDetails = () => {
                         Dates
                     </div>
                     <div>
-                        19-24
+                        {formattedStartDate}
+                        <span> </span>  TO {formattedEndDate}
                     </div>
                     <div className='font-semibold'>
                         Guests
                     </div>
                     <div>
-                        1 guest
+                        {guestCount}
+                        <span> </span> guest
                     </div>
                 </div>
             </div>
@@ -147,7 +170,7 @@ const PaymentDetails = () => {
 
                 </div>
                 <div className="w-[200px]">
-                    <Button label="Confirm and Pay" />
+                    <Button label="Confirm and Pay" onClick={handleConfirmAndPay} />
                 </div>
 
             </div>

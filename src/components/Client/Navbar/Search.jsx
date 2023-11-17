@@ -1,9 +1,11 @@
 import React from 'react'
 import { BiSearch } from 'react-icons/bi'
+import useSearchModal from '../../../Hooks/useSearchModal';
 
 const Search = () => {
-  return (
-    <div className="
+    const searchModal = useSearchModal();
+    return (
+        <div className="
     border-[1px]
     w-full
     md:w-auto
@@ -14,22 +16,23 @@ const Search = () => {
     transition
     cursor-pointer
 
-    ">
-        <div className="
+    "
+            onClick={searchModal.onOpen}>
+            <div className="
        flex
        flex-row
        items-center
        justify-between
         ">
-            <div className="
+                <div className="
             text-sm
             font-semibold
             px-6
             ">
-                Anywhere
+                    Anywhere
 
-            </div>
-            <div className="
+                </div>
+                <div className="
             hidden
             sm:block
             text-sm
@@ -39,11 +42,11 @@ const Search = () => {
             flex-1
             text-center
             "
-            >
-                AnyWeek
+                >
+                    AnyWeek
 
-            </div>
-            <div className="
+                </div>
+                <div className="
             text-sm
             pl-6
             pr-2
@@ -53,24 +56,24 @@ const Search = () => {
             items-center
             gap-3
             ">
-                <div className="hidden sm:block">
-                    Add guests
-                </div>
-                <div className="
+                    <div className="hidden sm:block">
+                        Add guests
+                    </div>
+                    <div className="
                 p-2
                 bg-rose-500
                 rounded-full
                 text-white
                 ">
-                    <BiSearch size={18} />
+                        <BiSearch size={18} />
+
+                    </div>
 
                 </div>
 
             </div>
-
-        </div>
-    </div >
-  )
+        </div >
+    )
 }
 
 export default Search

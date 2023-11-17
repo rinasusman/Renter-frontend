@@ -4,6 +4,8 @@ import ListingInfo from './ListingInfo'
 import { useParams } from 'react-router-dom';
 import userAxios from "../../../Axios/guestAxios.js";
 import ListingReservation from './ListingReservation';
+import Review from '../Review/Review.jsx';
+import ImagesHome from './ImagesHome.jsx';
 ;
 const Listsingle = () => {
 
@@ -54,6 +56,7 @@ const Listsingle = () => {
                 mb-10 
                 md:order-last 
                 md:col-span-3
+                shadow-xl
               "
                     >
                         <ListingReservation
@@ -63,7 +66,49 @@ const Listsingle = () => {
 
                 </div>
             </div>
-        </div>
+            <hr />
+            <ImagesHome data={listingData} />
+
+            <hr />
+            <div className='
+            flex 
+            justify-center
+            w-full 
+            items-center
+             '>
+                <div>
+                    <img src="/images/leafleft.jpg" alt="" />
+                </div>
+                <div className='text-neutral-700 font-bold  text-8xl'>4.97</div>
+                <div>
+                    <img src="/images/leafright.jpg" alt="" />
+                </div>
+            </div>
+            <div className='flex flex-col justify-center items-center'>
+                <div className='font-semibold'>Guest favourite</div>
+                <div className='text-neutral-500'> One of the most loved homes on Renter<br /> based on ratings, reviews and reliability</div>
+            </div>
+
+            <div className="
+           
+            grid
+            grid-cols-1
+            sm:grid-cols-1
+            md:grid-cols-1
+            lg:grid-cols-1
+            xl:grid-cols-2
+            2xl:grid-cols-2
+            p-2
+            justify-between">
+
+
+                <Review />
+                <Review />
+                <Review />
+                <Review />
+
+            </div>
+        </div >
     )
 }
 

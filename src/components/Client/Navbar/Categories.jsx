@@ -95,20 +95,15 @@ export const categories = [
   },
 ];
 
-function Categories({ onCategorySelect }) {
-  const searchParams = new URLSearchParams(window.location.search);
-  const category = searchParams.get('category');
-  const pathname = window.location.pathname;
-  const isMainPage = pathname === '/';
+function Categories({ selectedCategory, onCategorySelect }) {
+
 
 
   const handleCategorySelect = (selectedCategory) => {
     onCategorySelect(selectedCategory);
   }
   console.log(onCategorySelect, "........................")
-  if (!isMainPage) {
-    return null;
-  }
+
 
   return (
     <Container>
@@ -118,7 +113,7 @@ function Categories({ onCategorySelect }) {
             key={item.label}
             label={item.label}
             icon={item.icon}
-            selected={category === item.label}
+            selected={selectedCategory === item.label}
             onClick={() => handleCategorySelect(item.label)}
           />
         ))}
