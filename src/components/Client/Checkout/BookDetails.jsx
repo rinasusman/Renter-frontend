@@ -1,14 +1,16 @@
 import React from 'react'
 import Button from '../../Button'
 
-const BookDetails = ({ data }) => {
+const BookDetails = ({ data, total }) => {
     const { homeTitle, imageSrc, totalNights, price } = data
 
-
+    console.log(data, "dattaaaaaaaaaaaaaaaahomeeeeee:")
     const totalamount = data.price * data.totalNights
     const taxRate = 0.05;
     const taxAmount = totalamount * taxRate;
-    const total = totalamount + taxAmount
+
+
+
     return (
         <div
             className="

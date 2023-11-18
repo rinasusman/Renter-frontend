@@ -4,12 +4,19 @@ import Heading from '../../Heading'
 import BookDetails from './BookDetails'
 import ListingInfo from '../listingHome/ListingInfo'
 import PaymentDetails from './PaymentDetails'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useParams } from 'react-router-dom'
 
 const Checkout = () => {
+
     const location = useLocation();
     const reservationData = location.state.reservationData;
     console.log(reservationData, "checkout:");
+
+    const totalamount = reservationData.price * reservationData.totalNights;
+    const taxRate = 0.05;
+    const taxAmount = totalamount * taxRate;
+    const total = totalamount + taxAmount;
+
     return (
         <Container>
             <Heading
@@ -33,7 +40,7 @@ const Checkout = () => {
               mt-6
             "
                     >
-                        <PaymentDetails data={reservationData} />
+                        <PaymentDetails data={reservationData} total={total} />
                         <div
                             className="
                 order-first 
@@ -43,7 +50,7 @@ const Checkout = () => {
               "
                         >
                             <div className="sticky top-[185px]">
-                                <BookDetails data={reservationData} />
+                                <BookDetails data={reservationData} total={total} />
                             </div>
                         </div>
                     </div>

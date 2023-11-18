@@ -12,7 +12,7 @@ import useRazorpay from "react-razorpay";
 import { functionBookingCompletion } from "../../services/Apis";
 import { useNavigate } from "react-router-dom";
 
-const UserVehicleDetail = () => {
+const UserVehic111leDetail = () => {
     const [Razorpay] = useRazorpay();
     let amount;
     const socket = io("http://localhost:4002");

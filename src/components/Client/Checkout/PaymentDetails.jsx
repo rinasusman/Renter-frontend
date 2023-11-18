@@ -4,10 +4,14 @@ import Input from '../inputs/Input'
 import { useForm } from 'react-hook-form';
 import DropDown from '../inputs/DropDown';
 import useRazorpay from 'react-razorpay';
+import userAxios from '../../../Axios/guestAxios';
+import { Navigate, useNavigate } from 'react-router-dom';
 
-const PaymentDetails = ({ data }) => {
+const PaymentDetails = ({ data, total }) => {
     const [Razorpay] = useRazorpay();
-    const { guestCount, startDate, endDate } = data
+    const navigate = useNavigate();
+    const [isLoading, setIsLoading] = useState(false);
+    const { guestCount, startDate, endDate, id } = data
     const startDateObject = new Date(startDate);
     const day = startDateObject.getDate();
     const month = startDateObject.toLocaleString('default', { month: 'short' });
@@ -21,7 +25,70 @@ const PaymentDetails = ({ data }) => {
 
 
 
-    const handleConfirmAndPay = () => { }
+    const handleConfirmAndPay = async (data) => {
+        const payload = {
+
+            startDate: formattedStartDate,
+            endDate: formattedEndDate,
+            totalPrice: total,
+            paymentType: selectedPaymentMethod,
+            homeid: id
+        }
+        console.log(payload, "payload:::::::::::")
+        const tokens = localStorage.getItem('usertoken')
+
+        const headers = {
+            'Authorization': `Bearer ${tokens}`,
+            'Content-Type': 'application/json',
+        };
+        try {
+            const existingBooking = await userAxios.post('/checkBooking', payload, { headers });
+
+            if (existingBooking.data.isBooked) {
+                alert("The home is already booked for the specified date range");
+            }
+            else {
+                let options = {
+                    key: "rzp_test_93ATDTy6qKeM4A",
+                    key_secret: "caCaEnvv0qHtgANYPHBABQfi",
+                    amount: payload.totalPrice * 100,
+                    currency: "INR",
+                    name: "RENTER",
+                    description: "for testing purpose",
+                    handler: async function (response) {
+                        const book = await userAxios.post('/bookhome', payload, { headers });
+                        if (book.status === 201) {
+                            navigate("/myreservation");
+                        }
+                    },
+                    prefill: {
+                        name: "Velmurugan",
+                        email: "mvel1620r@gmail.com",
+                        contact: "7904425033",
+                    },
+                    notes: {
+                        address: "Razorpay Corporate office",
+                    },
+                    theme: {
+                        color: "#3399cc",
+                    },
+                }
+                if (typeof window.Razorpay === "function") {
+                    var pay = new window.Razorpay(options);
+                    pay.open();
+                } else {
+                    console.error("Razorpay script is not loaded or not available.");
+                }
+            }
+        } catch (error) {
+            // Handle other errors
+            console.error(error);
+            alert("Failed to check booking status. Please try again.");
+        }
+
+
+
+    }
 
 
 

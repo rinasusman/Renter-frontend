@@ -4,7 +4,7 @@ import DateCalendar from '../inputs/DateCalnder'
 import { Link } from 'react-router-dom'
 
 const ListingReservation = ({ data }) => {
-
+    console.log(data, "reser:")
     const [selectedRange, setSelectedRange] = useState(null);
     if (!data) {
         // Handle the case where 'data' is null or undefined
@@ -26,12 +26,13 @@ const ListingReservation = ({ data }) => {
                 price: data.price,
                 imageSrc: data.imageSrc,
                 totalNights: nights,
+                id: data._id
             };
             console.log(reservationData, "reservationData:");
             return (
                 <Link to="/checkout" state={{ reservationData }}>
                     <Button label="Reserve" />
-                </Link>
+                </Link >
             );
         }
     }
