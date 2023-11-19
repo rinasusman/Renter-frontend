@@ -14,6 +14,7 @@ import SIngleHome from './pages/Clients/SIngleHome';
 import Favourite from './pages/Clients/Favourite';
 import CheckoutPage from './pages/Clients/CheckoutPage';
 import HomeEdit from './pages/Clients/HomeEdit';
+import Trips from './pages/Clients/Trips';
 
 function App() {
   const token = localStorage.getItem('admintoken')
@@ -31,7 +32,7 @@ function App() {
           <Route exact path="/favorites" element={<Favourite />} />
           <Route exact path="/checkout" element={<CheckoutPage />} />
           <Route exact path="/homeedit" element={<HomeEdit />} />
-
+          <Route exact path="/mytrips" element={<Trips />} />
 
           <Route exact path="/dashboard" element={token ? < AdminHome /> : <Navigate to={'/admin'} />} />
           <Route exact path="/userlist" element={<UserForm />} />

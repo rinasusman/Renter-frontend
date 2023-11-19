@@ -50,6 +50,10 @@ const UserMenu = ({ }) => {
     // Open the sign-up modal by calling the onOpen function from the registerModal
     navigate("/favorites")
   };
+  const handleTripClick = () => {
+
+    navigate("/mytrips")
+  };
 
   const logoutHandler = async () => {
     try {
@@ -140,7 +144,7 @@ const UserMenu = ({ }) => {
 
             {userToken && userToken.userSignUp && userToken.userSignUp.message === 'You are logged' ? (
               <>
-                <MenuItem label="My trips" />
+                <MenuItem label="My trips" onClick={handleTripClick} />
                 <MenuItem label="My favorites" onClick={handleFavoritesClick} />
                 <MenuItem label="My reservations" />
                 <MenuItem label="My properties" onClick={handlePropertyClick} />

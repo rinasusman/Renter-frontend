@@ -10,7 +10,9 @@ const Input = ({
     required,
     register,
     value, onChange,
-    errors
+    errors,
+    maxLength,
+    height
 }) => {
     return (
         <div className="w-full relative">
@@ -28,7 +30,8 @@ const Input = ({
             <input
                 id={id}
                 // disabled={disabled}
-                {...register(id, { required })}
+                {...register(id, { required, maxLength })}
+                style={{ height: `${height}px` }}
                 placeholder=" "
                 type={type}
                 value={value}

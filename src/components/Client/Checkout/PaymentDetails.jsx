@@ -58,7 +58,7 @@ const PaymentDetails = ({ data, total }) => {
                     handler: async function (response) {
                         const book = await userAxios.post('/bookhome', payload, { headers });
                         if (book.status === 201) {
-                            navigate("/myreservation");
+                            navigate("/mytrips");
                         }
                     },
                     prefill: {

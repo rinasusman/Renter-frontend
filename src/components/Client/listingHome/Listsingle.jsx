@@ -11,12 +11,16 @@ const Listsingle = () => {
 
     const { id } = useParams();
     const [listingData, setListingData] = useState(null);
+    const [feedbackData, setFeedbackData] = useState([]);
     console.log(listingData, "dtaaaaaaa9999999999")
+    console.log(feedbackData, "feedback:::::")
     useEffect(() => {
         const fetchListingData = async () => {
             try {
                 const response = await userAxios.get(`/getListingById/${id}`);
                 setListingData(response.data);
+                const feedbackResponse = await userAxios.get(`/getFeedbackByHome/${id}`);
+                setFeedbackData(feedbackResponse.data);
             } catch (error) {
                 console.error('Error fetching listing data:', error);
             }
@@ -25,7 +29,12 @@ const Listsingle = () => {
         fetchListingData();
     }, [id]);
 
+    const calculateAverageRating = () => {
+        if (feedbackData.length === 0) return 0;
 
+        const totalStars = feedbackData.reduce((acc, feedback) => acc + parseInt(feedback.star), 0);
+        return (totalStars / feedbackData.length).toFixed(2);
+    };
 
     return (
         <div
@@ -79,7 +88,7 @@ const Listsingle = () => {
                 <div>
                     <img src="/images/leafleft.jpg" alt="" />
                 </div>
-                <div className='text-neutral-700 font-bold  text-8xl'>4.97</div>
+                <div className='text-neutral-700 font-bold  text-8xl'>{calculateAverageRating()}</div>
                 <div>
                     <img src="/images/leafright.jpg" alt="" />
                 </div>
@@ -102,10 +111,20 @@ const Listsingle = () => {
             justify-between">
 
 
-                <Review />
-                <Review />
-                <Review />
-                <Review />
+
+
+
+
+                {feedbackData.map((feedback) => (
+                    <Review
+                        key={feedback._id} // Use a unique key for each Review component
+                        userName={feedback.userId.name} // Assuming you have a userName property in your feedback data
+                        star={feedback.star}
+
+                        comment={feedback.feedback}
+                    />
+                ))}
+
 
             </div>
         </div >
