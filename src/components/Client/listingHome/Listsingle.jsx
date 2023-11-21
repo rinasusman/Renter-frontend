@@ -120,7 +120,7 @@ const Listsingle = () => {
                         key={feedback._id} // Use a unique key for each Review component
                         userName={feedback.userId.name} // Assuming you have a userName property in your feedback data
                         star={feedback.star}
-
+                        feedbackDate={feedback.createDate}
                         comment={feedback.feedback}
                     />
                 ))}

@@ -54,6 +54,10 @@ const UserMenu = ({ }) => {
 
     navigate("/mytrips")
   };
+  const handleReservationClick = () => {
+
+    navigate("/myreservation")
+  };
 
   const logoutHandler = async () => {
     try {
@@ -146,7 +150,7 @@ const UserMenu = ({ }) => {
               <>
                 <MenuItem label="My trips" onClick={handleTripClick} />
                 <MenuItem label="My favorites" onClick={handleFavoritesClick} />
-                <MenuItem label="My reservations" />
+                <MenuItem label="My reservations" onClick={handleReservationClick} />
                 <MenuItem label="My properties" onClick={handlePropertyClick} />
                 <MenuItem label="homebnb my home" onClick={rentModal.onOpen} />
                 <hr />

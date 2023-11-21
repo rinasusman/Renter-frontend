@@ -1,10 +1,18 @@
 import React from 'react'
 import { AiFillStar } from 'react-icons/ai'
 
-const Review = ({ userName, star, comment }) => {
+const Review = ({ userName, star, comment, feedbackDate }) => {
 
-    console.log(userName, "userName::::")
 
+    const calculateDaysAgo = (date) => {
+        const today = new Date();
+        const feedbackDate = new Date(date);
+        console.log(feedbackDate, "date::::")
+        const timeDifference = today - feedbackDate;
+        console.log(timeDifference, "timeDifference:")
+        const daysAgo = timeDifference / (1000 * 60 * 60 * 24);
+        return Math.floor(daysAgo)
+    };
 
     return (
         <div className='
@@ -26,7 +34,7 @@ const Review = ({ userName, star, comment }) => {
                     ))}
 
                 </div>
-                <div>6 days ago</div>
+                <div>{calculateDaysAgo(feedbackDate)} days ago</div>
             </div>
             <div className=' mt-2 items-center text-neutral-500'>
                 {comment}

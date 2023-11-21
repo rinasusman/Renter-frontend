@@ -3,6 +3,7 @@ import { SlCalender } from "react-icons/sl";
 import { MdOutlineFeedback } from 'react-icons/md';
 import useFeedbackModal from '../../../Hooks/useFeedbackModal';
 import Button from '../../Button';
+import { Link } from 'react-router-dom';
 const TripCard = ({ booking, activeTab }) => {
 
 
@@ -26,7 +27,9 @@ const TripCard = ({ booking, activeTab }) => {
                         <div>
                             <SlCalender size={24} />
                         </div>
-                        <div>Book Again</div>
+                        <Link to={`/lsitinfo/${booking.home.id}`} key={booking.home.id}>
+                            <div>Book Again</div>
+                        </Link>
                         <div>
                             <MdOutlineFeedback size={28} />
                         </div>
