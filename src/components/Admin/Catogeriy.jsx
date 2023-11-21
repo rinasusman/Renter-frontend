@@ -71,9 +71,7 @@ const Catogeriy = ({
                                             <th scope="col" className="px-6 py-4">
                                                 DESCRIPTION
                                             </th>
-                                            <th scope="col" className="px-6 py-4">
-                                                ACTION
-                                            </th>
+
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -86,11 +84,7 @@ const Catogeriy = ({
                                                 <td className="whitespace-nowrap text-black font-medium px-6 py-4">
                                                     {category.description}
                                                 </td>
-                                                <td className="whitespace-nowrap px-2 py-2">
-                                                    <button className="bg-red-500 rounded-[3px] px-3 h-[20px] text-white cursor-pointer font-medium">
-                                                        EDIT
-                                                    </button>
-                                                </td>
+
                                             </tr>
                                         ))}
                                     </tbody>
