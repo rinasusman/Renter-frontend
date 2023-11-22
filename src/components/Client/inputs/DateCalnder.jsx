@@ -7,7 +7,7 @@ const DateCalendar = ({ setSelectedRange }) => {
     const today = new Date();
     const [selectionRange, setSelectionRange] = useState({
         startDate: today,
-        endDate: new Date(today.getTime() + 24 * 60 * 60 * 1000), // Set an initial end date (1 day later)
+        endDate: new Date(today.getTime() + 24 * 60 * 60 * 1000),
         key: 'selection',
     });
     console.log(selectionRange, "rangeeeeeeeeeeeeeeeee")
@@ -20,7 +20,7 @@ const DateCalendar = ({ setSelectedRange }) => {
         <DateRange
             ranges={[selectionRange]}
             onChange={handleSelect}
-            minDate={today} // Prevent selecting dates earlier than today
+            minDate={today}
         />
     );
 }

@@ -18,6 +18,8 @@ const ListingEdit = () => {
     const [description, setDescription] = useState(itemData.description);
     const [price, setPrice] = useState(itemData.price);
     const [selectedImages, setSelectedImages] = useState([]);
+    const [previewImages, setPreviewImages] = useState(itemData.imageUrl ? [itemData.imageUrl] : []);
+
     const navigate = useNavigate()
 
 
@@ -46,6 +48,8 @@ const ListingEdit = () => {
                     return data.secure_url;
                 })
             );
+            setPreviewImages((prevImages) => [...prevImages, ...imageUrls]);
+
             await userAxios.put(`/edithomes/${itemData._id}`, {
                 title,
                 locations,
@@ -54,13 +58,44 @@ const ListingEdit = () => {
                 bathroomCount,
                 description,
                 price,
-                imageUrls
+                imageUrls: [...previewImages, ...imageUrls],
             });
             navigate('/myproperties')
         } catch (error) {
             console.error('Error updating home:', error);
         }
     };
+    const handleRemoveImage = (index) => {
+        // Remove the image at the specified index from the previewImages array
+        setPreviewImages((prevImages) => prevImages.filter((_, i) => i !== index));
+    };
+    const renderPreviewImages = () => {
+        return Array.from(selectedImages).map((image, index) => (
+            <div key={index} className="mr-2 mb-2 relative">
+                <img className="w-[100px] h-[100px]" src={URL.createObjectURL(image)} alt={`Preview ${index}`} />
+                <button
+                    className="absolute top-0 right-0 bg-red-500 text-white p-1 rounded-full cursor-pointer"
+                    onClick={() => handleRemoveImage(index)}
+                >
+                    X
+                </button>
+            </div>
+        ));
+    };
+
+    // const renderSelectedImages = () => {
+    //     return Array.from(selectedImages).map((image, index) => (
+    //         <div key={index} className="mr-2 mb-2">
+    //             <img className="w-[100px] h-[100px]" src={URL.createObjectURL(image)} alt={`Selected ${index}`} />
+    //             <button
+    //                 className="absolute top-0 right-0 bg-red-500 text-white p-1 rounded-full cursor-pointer"
+    //                 onClick={() => handleRemoveImage(index)}
+    //             >
+    //                 X
+    //             </button>
+    //         </div>
+    //     ));
+    // };
     return (
         <Container>
             <Heading
@@ -177,6 +212,14 @@ const ListingEdit = () => {
                         "
                         src={itemData.imageSrc}
                         alt="" />
+                    <hr />
+                    <div>Preview Images:</div>
+                    <div className="flex flex-wrap">
+                        <div className="flex flex-wrap">{renderPreviewImages()}</div>
+                    </div>
+                    <hr />
+                    {/* <div>Selected Images:</div>
+                    <div className="flex flex-wrap">{renderSelectedImages()}</div> */}
                     <hr />
                     <div> Add More Images:</div>
 

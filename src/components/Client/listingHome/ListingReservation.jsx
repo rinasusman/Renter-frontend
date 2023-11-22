@@ -7,17 +7,17 @@ const ListingReservation = ({ data }) => {
     console.log(data, "reser:")
     const [selectedRange, setSelectedRange] = useState(null);
     if (!data) {
-        // Handle the case where 'data' is null or undefined
+
         return <div>No data available</div>;
     }
 
     const handleReservation = () => {
         if (selectedRange) {
-            // Calculate the nights and other necessary data
+
             const nights = calculateNights();
             const total = data.price * nights;
 
-            // Prepare the data to be sent to the Checkout component
+
             const reservationData = {
                 startDate: selectedRange.startDate,
                 endDate: selectedRange.endDate,

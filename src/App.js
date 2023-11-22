@@ -17,6 +17,7 @@ import HomeEdit from './pages/Clients/HomeEdit';
 import Trips from './pages/Clients/Trips';
 import ReservPage from './pages/Clients/ReservPage';
 import BookingList from './pages/Admin/BookingList';
+import Panel from './pages/Clients/Panel';
 
 function App() {
   const token = localStorage.getItem('admintoken')
@@ -36,7 +37,7 @@ function App() {
           <Route exact path="/homeedit" element={<HomeEdit />} />
           <Route exact path="/mytrips" element={<Trips />} />
           <Route exact path="/myreservation" element={<ReservPage />} />
-
+          <Route exact path="/panelmanage" element={<Panel />} />
 
 
           <Route exact path="/dashboard" element={token ? < AdminHome /> : <Navigate to={'/admin'} />} />

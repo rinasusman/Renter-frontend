@@ -58,6 +58,10 @@ const UserMenu = ({ }) => {
 
     navigate("/myreservation")
   };
+  const handlePanelClick = () => {
+
+    navigate("/panelmanage")
+  };
 
   const logoutHandler = async () => {
     try {
@@ -71,18 +75,13 @@ const UserMenu = ({ }) => {
     }
   }
 
-  const onRent = useCallback(() => {
-    if (!userToken) {
-      return loginModal.onOpen()
-    }
-    rentModal.onOpen()
-  }, [userToken, loginModal, rentModal])
+
 
   return (
     <div className="relative">
       <div className="flex flex-row items-center gap-3">
         <div
-          onClick={onRent}
+
           className="
             hidden
             md:block
@@ -96,7 +95,7 @@ const UserMenu = ({ }) => {
             cursor-pointer
           "
         >
-          Renter your home
+          Welcome <span className="text-rose-500">{name}</span>
         </div>
         <div
           onClick={toggleOpen}
@@ -149,9 +148,11 @@ const UserMenu = ({ }) => {
             {userToken && userToken.userSignUp && userToken.userSignUp.message === 'You are logged' ? (
               <>
                 <MenuItem label="My trips" onClick={handleTripClick} />
+                <MenuItem label="Messages" />
                 <MenuItem label="My favorites" onClick={handleFavoritesClick} />
                 <MenuItem label="My reservations" onClick={handleReservationClick} />
                 <MenuItem label="My properties" onClick={handlePropertyClick} />
+                <MenuItem label="Panel Manage" onClick={handlePanelClick} />
                 <MenuItem label="homebnb my home" onClick={rentModal.onOpen} />
                 <hr />
                 <MenuItem label="Logout" onClick={logoutHandler} />

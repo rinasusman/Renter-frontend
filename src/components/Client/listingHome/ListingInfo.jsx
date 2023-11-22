@@ -1,6 +1,6 @@
 import React from 'react'
 import Avatar from '../../Avatar'
-
+import { IoMdChatbubbles } from "react-icons/io";
 const ListingInfo = ({ data }) => {
     console.log(data, "nameeeeeeeeeeeeeeeeee");
     if (!data) {
@@ -56,6 +56,13 @@ const ListingInfo = ({ data }) => {
                     description={category?.description}
                 />
             )} */}
+            <div className='flex flex-row gap-3 cursor-pointer font-semibold items-center'>
+                <div className='bg-rose-500 p-1 rounded-full'>
+                    <IoMdChatbubbles size={28} color='white' />
+                </div>
+                Chat with {hostName}
+            </div>
+
             <hr />
             <div className="
         text-lg font-light text-neutral-500">
