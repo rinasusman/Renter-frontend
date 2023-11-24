@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useForm } from "react-hook-form";
@@ -41,7 +41,7 @@ const RentModal = () => {
   const {
     register,
     handleSubmit,
-    setValue,
+
     formState: { errors },
     reset,
   } = useForm({

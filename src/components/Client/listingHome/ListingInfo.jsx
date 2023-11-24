@@ -1,5 +1,4 @@
 import React from 'react'
-import Avatar from '../../Avatar'
 import { IoMdChatbubbles } from "react-icons/io";
 const ListingInfo = ({ data }) => {
     console.log(data, "nameeeeeeeeeeeeeeeeee");

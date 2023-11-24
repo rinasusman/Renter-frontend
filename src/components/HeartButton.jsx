@@ -1,15 +1,14 @@
 // HeartButton.js
 import React, { useEffect, useState } from 'react';
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import useLoginModal from '../Hooks/useLoginModal';
 import userAxios from '../Axios/guestAxios';
-import { setUserLogin, setUserLogout } from '../Redux/container/userAuth.slice';
+
 
 const HeartButton = ({ listingId }) => {
     const [isFilled, setIsFilled] = useState(false);
     const userTokens = useSelector((state) => state.auth.userToken);
-    const dispatch = useDispatch();
     const loginModal = useLoginModal();
     const tokens = localStorage.getItem('usertoken');
 
@@ -58,19 +57,7 @@ const HeartButton = ({ listingId }) => {
     };
 
     // Function to update isFilled and localStorage after user logs in
-    const handleLogin = () => {
-        dispatch(setUserLogin(tokens));
-        const storedHeartState = localStorage.getItem(`heart-${listingId}`);
-        if (storedHeartState) {
-            setIsFilled(storedHeartState === 'true');
-        }
-    };
-    const handleLogout = () => {
 
-        setIsFilled(false);
-        localStorage.removeItem(`heart-${listingId}`);
-        dispatch(setUserLogout());
-    };
 
     return (
         <>

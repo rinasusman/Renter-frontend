@@ -3,7 +3,7 @@ import Container from '../../Container';
 import EmptyPage from '../../EmptyPage';
 import ListingCard from './ListingCard';
 import userAxios from "../../../Axios/guestAxios.js";
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { selectSearchResults } from '../../../Redux/container/searchSlice.js';
 import { useSelector } from 'react-redux';
 
@@ -58,9 +58,6 @@ const ListingHome = ({ selectedCategory }) => {
         fetchHomeDetails();
     }, [selectedCategory, location.search, searchResults]);
 
-    // useEffect(() => {
-    //     fetchHomeDetails();
-    // }, [selectedCategory, location.search]);
     const resetFilters = () => {
 
         fetchHomeDetails();

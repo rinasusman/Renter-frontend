@@ -4,7 +4,7 @@ import { FcGoogle } from "react-icons/fc";
 
 import { useForm } from "react-hook-form";
 
-import userAxios from "../../../Axios/guestAxios.js";
+
 import Heading from "../../Heading";
 import Button from "../../Button";
 import Modal from "./Modal";
@@ -14,7 +14,7 @@ import useLoginModal from "../../../Hooks/useLoginModal";
 import { useDispatch, useSelector } from "react-redux";
 import { useLoginMutation } from "../../../Redux/container/userApiSlice.js";
 import { setUserLogin } from "../../../Redux/container/userAuth.slice.js";
-import axios from "axios";
+
 
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
@@ -27,7 +27,6 @@ const LoginModal = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [login, { isLoadings }] = useLoginMutation();
-  const { userToken } = useSelector((state) => state.auth);
   const [isLoading, setIsLoading] = useState(false);
 
 

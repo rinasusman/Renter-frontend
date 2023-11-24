@@ -15,7 +15,7 @@ const ListingReservation = ({ data }) => {
         if (selectedRange) {
 
             const nights = calculateNights();
-            const total = data.price * nights;
+
 
 
             const reservationData = {

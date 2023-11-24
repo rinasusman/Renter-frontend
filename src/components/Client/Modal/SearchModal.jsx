@@ -1,5 +1,4 @@
-import React, { useState, useCallback, useEffect, useMemo } from "react";
-import { toast } from 'react-toastify';
+import React, { useState, useEffect, useMemo } from "react";
 import 'react-toastify/dist/ReactToastify.css';
 import { useForm } from "react-hook-form";
 import { setSearchResults } from "../../../Redux/container/searchSlice.js";
@@ -9,7 +8,6 @@ import Input from "../inputs/Input.jsx";
 import Heading from "../../Heading.jsx";
 import Modal from "./Modal.jsx";
 import Counter from "../inputs/Counter.jsx";
-import ImageUpload from "../inputs/ImageUpload.jsx";
 import userAxios from '../../../Axios/guestAxios.js';
 import useSearchModal from "../../../Hooks/useSearchModal.js";
 import DateCalendar from "../inputs/DateCalnder.jsx";
@@ -37,7 +35,6 @@ const SearchModal = () => {
   const {
     register,
     handleSubmit,
-    setValue,
     formState: { errors },
     reset,
   } = useForm({
