@@ -1,6 +1,6 @@
 import React from 'react'
 import { AiFillStar } from 'react-icons/ai'
-
+import PropTypes from 'prop-types';
 const Review = ({ userName, star, comment, feedbackDate }) => {
 
 
@@ -43,5 +43,10 @@ const Review = ({ userName, star, comment, feedbackDate }) => {
         </div>
     )
 }
-
+Review.propTypes = {
+    userName: PropTypes.string.isRequired,
+    star: PropTypes.string.isRequired,
+    comment: PropTypes.string.isRequired,
+    feedbackDate: PropTypes.string.isRequired,
+};
 export default Review

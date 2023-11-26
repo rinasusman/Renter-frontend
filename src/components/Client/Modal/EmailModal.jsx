@@ -1,31 +1,24 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React from "react";
 
-import { FcGoogle } from "react-icons/fc";
+
 
 import { useForm } from "react-hook-form";
 
 import userAxios from "../../../Axios/guestAxios.js";
 import Heading from "../../Heading.jsx";
-import Button from "../../Button.jsx";
+
 import Modal from "./Modal.jsx";
 import Input from "../inputs/Input.jsx";
-import useRegisterModal from "../../../Hooks/useRegisterModal.js";
-import { useDispatch, useSelector } from "react-redux";
-import { useLoginMutation } from "../../../Redux/container/userApiSlice.js";
-import { setUserLogin } from "../../../Redux/container/userAuth.slice.js";
 import axios from "axios";
 
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
 import useEmailModal from "../../../Hooks/useEmailModal.js";
 import useForgotpassOtpModal from "../../../Hooks/useForgotpassOtpModal.js";
 
 const EmailModal = () => {
   const otpModal = useForgotpassOtpModal();
   const emailModal = useEmailModal();
-  const navigate = useNavigate();
-  const [error, setError] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
+
 
 
   const {
@@ -52,7 +45,7 @@ const EmailModal = () => {
 
 
   const onSubmit = async (data) => {
-    setIsLoading(true);
+
 
 
 
@@ -66,14 +59,12 @@ const EmailModal = () => {
       }
     } catch (e) {
       if (axios.isAxiosError(e)) {
-        setError(e.response?.data?.error || 'An error occurred');
+
         toast.error(e.response?.data?.error || '');
       } else {
-        setError('An error occurred');
+
         toast.error('An error occurred');
       }
-    } finally {
-      setIsLoading(false);
     }
   };
 

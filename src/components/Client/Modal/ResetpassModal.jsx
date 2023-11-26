@@ -1,30 +1,22 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState } from "react";
 
-import { FcGoogle } from "react-icons/fc";
+
 
 import { useForm } from "react-hook-form";
 
 import userAxios from "../../../Axios/guestAxios.js";
 import Heading from "../../Heading.jsx";
-import Button from "../../Button.jsx";
 import Modal from "./Modal.jsx";
 import Input from "../inputs/Input.jsx";
-import useRegisterModal from "../../../Hooks/useRegisterModal.js";
-import { useDispatch, useSelector } from "react-redux";
-import { useLoginMutation } from "../../../Redux/container/userApiSlice.js";
-import { setUserLogin } from "../../../Redux/container/userAuth.slice.js";
 import axios from "axios";
 
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
 import useResetpassModal from "../../../Hooks/useResetpassModal.js";
 import useLoginModal from "../../../Hooks/useLoginModal.js";
 
 const ResetpassModal = () => {
   const loginModal = useLoginModal();
   const resetModal = useResetpassModal();
-  const navigate = useNavigate();
-  const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [passwordMatchError, setPasswordMatchError] = useState(false);
 
@@ -60,9 +52,7 @@ const ResetpassModal = () => {
     }
     setPasswordMatchError(false);
 
-    const payload = {
-      password: data.password,
-    };
+
     try {
       const otpSend = await userAxios.post('/passwordReset', data);
       if (otpSend) {
@@ -71,10 +61,10 @@ const ResetpassModal = () => {
       }
     } catch (e) {
       if (axios.isAxiosError(e)) {
-        setError(e.response?.data?.error || 'An error occurred');
+
         toast.error(e.response?.data?.error || '');
       } else {
-        setError('An error occurred');
+
         toast.error('An error occurred');
       }
     } finally {
@@ -99,10 +89,7 @@ const ResetpassModal = () => {
           register={register}
           errors={errors}
           required
-          onChange={(e) => {
-            const password = e.target.value;
 
-          }}
         />
 
       </div>

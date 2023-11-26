@@ -1,5 +1,5 @@
 import React from "react";
-
+import PropTypes from 'prop-types';
 const Avatar = ({ src }) => {
   return (
     <img
@@ -11,5 +11,7 @@ const Avatar = ({ src }) => {
     />
   );
 };
-
+Avatar.propTypes = {
+  src: PropTypes.string, // You can adjust the type based on your requirements
+};
 export default Avatar;

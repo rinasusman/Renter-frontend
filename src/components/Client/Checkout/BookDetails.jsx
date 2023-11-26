@@ -1,5 +1,5 @@
 import React from 'react'
-import Button from '../../Button'
+import PropTypes from 'prop-types';
 
 const BookDetails = ({ data, total }) => {
     const { homeTitle, imageSrc, totalNights, price } = data
@@ -24,7 +24,7 @@ const BookDetails = ({ data, total }) => {
             <div className="
               flex flex-row  h-[120px] gap-1 p-4">
                 <div className="text-2xl font-semibold w-[150px] h-[200px] ">
-                    <img fill className="rounded-xl " src={imageSrc} alt="" />
+                    <img className="rounded-xl " src={imageSrc} alt="" />
                 </div>
                 <div className="font-light text-neutral-600">
                     {homeTitle}
@@ -81,5 +81,13 @@ const BookDetails = ({ data, total }) => {
         </div >
     )
 }
-
+BookDetails.propTypes = {
+    data: PropTypes.shape({
+        homeTitle: PropTypes.string.isRequired,
+        imageSrc: PropTypes.string.isRequired,
+        totalNights: PropTypes.number.isRequired,
+        price: PropTypes.number.isRequired,
+    }).isRequired,
+    total: PropTypes.number.isRequired,
+};
 export default BookDetails

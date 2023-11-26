@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import Container from '../../Container'
 import Heading from '../../Heading'
-
+import PropTypes from 'prop-types';
 import TripCard from './TripCard';
 import userAxios from '../../../Axios/guestAxios';
 const Mytrips = ({
@@ -106,5 +106,8 @@ const Mytrips = ({
         </Container >
     )
 }
-
+Mytrips.propTypes = {
+    title: PropTypes.string,
+    subtitle: PropTypes.string,
+};
 export default Mytrips

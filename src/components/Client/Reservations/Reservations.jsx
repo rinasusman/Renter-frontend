@@ -9,7 +9,6 @@ const Reservations = () => {
 
 
     const [reservations, setReservations] = useState([]);
-    const [loading, setLoading] = useState(true);
     console.log("reservations::", reservations)
 
     useEffect(() => {
@@ -27,8 +26,6 @@ const Reservations = () => {
                 setReservations(response.data);
             } catch (error) {
                 console.error('Error fetching reservations:', error);
-            } finally {
-                setLoading(false);
             }
         };
 

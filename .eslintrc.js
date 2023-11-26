@@ -13,7 +13,7 @@ module.exports = {
                 "node": true
             },
             "files": [
-                ".eslintrc.{js,cjs}"
+                ".eslintrc.{js,cjs,jsx}"
             ],
             "parserOptions": {
                 "sourceType": "script"
@@ -28,7 +28,7 @@ module.exports = {
         "react"
     ],
     "rules": {
-        "semi": ["error", "always"],
-        "quotes": ["error", "double"]
+        // "semi": ["error", "always"],
+        // "quotes": ["error", "double"]
     }
 }

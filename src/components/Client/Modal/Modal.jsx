@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { IoMdClose } from 'react-icons/io';
 import Button from "../../Button";
-
+import PropTypes from 'prop-types';
 
 const Modal = ({
     isOpen,
@@ -13,7 +13,6 @@ const Modal = ({
     actionLabel,
     disabled,
     secondaryAction,
-    secondaryLabel,
     secondaryActionLabel
 }) => {
     const [showModal, setShowModal] = useState(isOpen);
@@ -164,5 +163,17 @@ const Modal = ({
         </>
     );
 }
-
+Modal.propTypes = {
+    isOpen: PropTypes.bool.isRequired,
+    onClose: PropTypes.func.isRequired,
+    onSubmit: PropTypes.func.isRequired,
+    title: PropTypes.string.isRequired,
+    body: PropTypes.node.isRequired,
+    footer: PropTypes.node,
+    actionLabel: PropTypes.string.isRequired,
+    disabled: PropTypes.bool.isRequired,
+    secondaryAction: PropTypes.func,
+    secondaryLabel: PropTypes.string,
+    secondaryActionLabel: PropTypes.string,
+};
 export default Modal;

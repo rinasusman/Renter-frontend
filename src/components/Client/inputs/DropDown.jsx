@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types';
 
 const DropDown = ({ id, label, options, selectedValue, onChange }) => {
     return (
@@ -33,5 +34,16 @@ const DropDown = ({ id, label, options, selectedValue, onChange }) => {
         </div >
     )
 }
-
+DropDown.propTypes = {
+    id: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
+    options: PropTypes.arrayOf(
+        PropTypes.shape({
+            value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+            label: PropTypes.string,
+        })
+    ).isRequired,
+    selectedValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    onChange: PropTypes.func,
+};
 export default DropDown

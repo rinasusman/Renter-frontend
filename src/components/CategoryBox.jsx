@@ -1,6 +1,6 @@
+import React from 'react';
 import { useCallback } from "react";
-import { IconType } from "react-icons";
-import { useLocation, useNavigate } from "react-router-dom";
+import PropTypes from 'prop-types';
 
 function CategoryBox({
   icon: Icon,
@@ -8,8 +8,7 @@ function CategoryBox({
   selected,
   onClick
 }) {
-  const navigate = useNavigate();
-  const location = useLocation();
+
 
 
   const handleClick = useCallback(() => {
@@ -46,5 +45,10 @@ function CategoryBox({
     </div>
   );
 }
-
+CategoryBox.propTypes = {
+  icon: PropTypes.elementType.isRequired,
+  label: PropTypes.string.isRequired,
+  selected: PropTypes.bool.isRequired,
+  onClick: PropTypes.func.isRequired,
+};
 export default CategoryBox;

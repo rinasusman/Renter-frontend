@@ -1,6 +1,7 @@
 import React from 'react';
 import CategoryBox from '../../CategoryBox';
 import Container from '../../Container';
+import PropTypes from 'prop-types';
 import { TbBeach, TbMountain, TbPool } from 'react-icons/tb';
 import {
   GiBarn,
@@ -121,5 +122,8 @@ function Categories({ selectedCategory, onCategorySelect }) {
     </Container>
   );
 }
-
+Categories.propTypes = {
+  selectedCategory: PropTypes.string,
+  onCategorySelect: PropTypes.func,
+};
 export default Categories;

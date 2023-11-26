@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import Container from '../../Container'
 import Heading from '../../Heading'
 import { TbBrandBooking, TbWallet } from 'react-icons/tb'
-import { FiUsers } from 'react-icons/fi'
 import { FaRegCalendarMinus } from 'react-icons/fa'
 import userAxios from '../../../Axios/guestAxios';
 import Chart from "react-apexcharts";
@@ -63,8 +62,7 @@ const PanelManage = () => {
         totalEarnings: 0,
         totalBookings: 0,
     });
-    const [wallet, setWallet] = useState(0);
-    const [loading, setLoading] = useState(true);
+
 
     useEffect(() => {
         const fetchEarnings = async () => {
@@ -202,8 +200,6 @@ const PanelManage = () => {
                 });
             } catch (error) {
                 console.error('Error fetching reservations:', error);
-            } finally {
-                setLoading(false);
             }
         };
 
@@ -315,7 +311,7 @@ const PanelManage = () => {
                             text-[#5a5c69] 
                             mt-[5px]
                             '>
-                                {wallet}
+                                0
                             </h1>
                         </div>
                         <TbWallet fontSize={28} />

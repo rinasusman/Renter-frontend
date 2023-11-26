@@ -1,6 +1,5 @@
 import React from 'react'
-
-
+import PropTypes from 'prop-types';
 import Button from "./Button";
 import Heading from "./Heading";
 const EmptyPage = ({
@@ -9,7 +8,7 @@ const EmptyPage = ({
     showReset,
     onReset
 }) => {
-    // const router = useRouter();
+
 
     return (
         <div
@@ -40,4 +39,10 @@ const EmptyPage = ({
     );
 };
 
+EmptyPage.propTypes = {
+    title: PropTypes.string,
+    subtitle: PropTypes.string,
+    showReset: PropTypes.bool,
+    onReset: PropTypes.func,
+};
 export default EmptyPage

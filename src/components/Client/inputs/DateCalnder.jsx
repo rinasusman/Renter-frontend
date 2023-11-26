@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { DateRange } from 'react-date-range';
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
+import PropTypes from 'prop-types';
 
 const DateCalendar = ({ setSelectedRange }) => {
     const today = new Date();
@@ -24,5 +25,7 @@ const DateCalendar = ({ setSelectedRange }) => {
         />
     );
 }
-
+DateCalendar.propTypes = {
+    setSelectedRange: PropTypes.func.isRequired,
+};
 export default DateCalendar;

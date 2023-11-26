@@ -6,7 +6,7 @@ import userAxios from "../../../Axios/guestAxios.js";
 import { useLocation } from 'react-router-dom';
 import { selectSearchResults } from '../../../Redux/container/searchSlice.js';
 import { useSelector } from 'react-redux';
-
+import PropTypes from 'prop-types';
 const ListingHome = ({ selectedCategory }) => {
     const [listings, setListings] = useState([]);
     const [heartStates, setHeartStates] = useState({});
@@ -139,5 +139,7 @@ const ListingHome = ({ selectedCategory }) => {
         </>
     );
 };
-
+ListingHome.propTypes = {
+    selectedCategory: PropTypes.string,
+};
 export default ListingHome;

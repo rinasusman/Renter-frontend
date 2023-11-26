@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
-import Heading from '../../Heading';
-import HeartButton from '../../HeartButton';
+import React from "react";
+import Heading from "../../Heading.jsx";
+import HeartButton from "../../HeartButton.jsx";
+import PropTypes from "prop-types";
 
 const ListingHead = ({ data, isHeartFilled, toggleHeart }) => {
 
@@ -156,6 +157,12 @@ const ListingHead = ({ data, isHeartFilled, toggleHeart }) => {
 
         </div >
     );
-}
+};
+
+ListingHead.propTypes = {
+    data: PropTypes.object,
+    isHeartFilled: PropTypes.bool,
+    toggleHeart: PropTypes.func,
+};
 
 export default ListingHead;

@@ -1,7 +1,7 @@
 import React from 'react'
 import { useCallback } from 'react';
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
-
+import PropTypes from 'prop-types';
 const Counter = ({ title,
     subtitle,
     value,
@@ -81,5 +81,10 @@ const Counter = ({ title,
         </div>
     )
 }
-
+Counter.propTypes = {
+    title: PropTypes.string.isRequired,
+    subtitle: PropTypes.string.isRequired,
+    value: PropTypes.number.isRequired,
+    onChange: PropTypes.func.isRequired,
+};
 export default Counter

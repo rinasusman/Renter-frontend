@@ -4,7 +4,7 @@ import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { useSelector } from 'react-redux';
 import useLoginModal from '../Hooks/useLoginModal';
 import userAxios from '../Axios/guestAxios';
-
+import PropTypes from 'prop-types';
 
 const HeartButton = ({ listingId }) => {
     const [isFilled, setIsFilled] = useState(false);
@@ -76,5 +76,7 @@ const HeartButton = ({ listingId }) => {
         </>
     );
 };
-
+HeartButton.propTypes = {
+    listingId: PropTypes.string.isRequired,
+};
 export default HeartButton;

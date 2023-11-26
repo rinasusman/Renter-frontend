@@ -2,9 +2,8 @@ import React from 'react'
 import Container from '../../Container'
 import Heading from '../../Heading'
 import BookDetails from './BookDetails'
-import ListingInfo from '../listingHome/ListingInfo'
 import PaymentDetails from './PaymentDetails'
-import { useLocation, useParams } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 
 const Checkout = () => {
 

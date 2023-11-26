@@ -97,7 +97,7 @@ const RentModal = () => {
     return "Back";
   }, [step]);
 
-  const onSubmit = async (data) => {
+  const onSubmit = async () => {
     if (step !== STEPS.PRICE) {
       return onNext();
     }
@@ -136,7 +136,7 @@ const RentModal = () => {
       }
 
     } catch (e) {
-
+      console.log(e.message)
     }
   };
 

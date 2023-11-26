@@ -1,16 +1,16 @@
 import React, { useState } from 'react'
 import Button from '../../Button'
-import Input from '../inputs/Input'
+
 import { useForm } from 'react-hook-form';
 import DropDown from '../inputs/DropDown';
-import useRazorpay from 'react-razorpay';
+// import useRazorpay from 'react-razorpay';
 import userAxios from '../../../Axios/guestAxios';
-import { Navigate, useNavigate } from 'react-router-dom';
-
+import { useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
 const PaymentDetails = ({ data, total }) => {
-    const [Razorpay] = useRazorpay();
+    // const [Razorpay] = useRazorpay();
     const navigate = useNavigate();
-    const [isLoading, setIsLoading] = useState(false);
+
     const { guestCount, startDate, endDate, id } = data
     const startDateObject = new Date(startDate);
     const day = startDateObject.getDate();
@@ -25,7 +25,7 @@ const PaymentDetails = ({ data, total }) => {
 
 
 
-    const handleConfirmAndPay = async (data) => {
+    const handleConfirmAndPay = async () => {
         const payload = {
 
             startDate: formattedStartDate,
@@ -55,7 +55,7 @@ const PaymentDetails = ({ data, total }) => {
                     currency: "INR",
                     name: "RENTER",
                     description: "for testing purpose",
-                    handler: async function (response) {
+                    handler: async function () {
                         const book = await userAxios.post('/bookhome', payload, { headers });
                         if (book.status === 201) {
                             navigate("/mytrips");
@@ -95,12 +95,11 @@ const PaymentDetails = ({ data, total }) => {
 
 
     const {
-        register,
-        handleSubmit,
-        reset,
-        formState: {
-            errors,
-        },
+        // register,
+        // handleSubmit,
+        // reset,
+        formState: { }
+
     } = useForm({
         defaultValues: {
             email: '',
@@ -167,7 +166,7 @@ const PaymentDetails = ({ data, total }) => {
                 <div className='flex flex-row justify-between'>
                     <div>Pay with</div>
                     <div className='w-[200px]' >
-                        <img fill src="/images/payment.jpeg" alt="" /></div>
+                        <img src="/images/payment.jpeg" alt="" /></div>
                 </div>
 
                 <DropDown
@@ -233,7 +232,7 @@ const PaymentDetails = ({ data, total }) => {
                     text-neutral-500 
                     pb-3'>
 
-                    By selecting the button below, I agree to the <a> Host's House Rules, Ground rules for guests, Renter's</a> <br />Rebooking and Refund Policy and that Airbnb can charge my payment method if I’m responsible<br /> for damage.
+                    By selecting the button below, I agree to the <a> Hosts House Rules, Ground rules for guests, Renters</a> <br />Rebooking and Refund Policy and that Airbnb can charge my payment method if Im responsible<br /> for damage.
 
                 </div>
                 <div className="w-[200px]">
@@ -244,5 +243,9 @@ const PaymentDetails = ({ data, total }) => {
         </div >
     )
 }
+PaymentDetails.propTypes = {
+    data: PropTypes.object.isRequired,
+    total: PropTypes.number.isRequired,
+};
 
 export default PaymentDetails

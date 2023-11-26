@@ -1,4 +1,5 @@
-import { IconType } from "react-icons";
+import React from 'react'
+import PropTypes from 'prop-types';
 
 const CategoryInput = ({
 
@@ -30,5 +31,10 @@ const CategoryInput = ({
     </div>
   );
 }
-
+CategoryInput.propTypes = {
+  icon: PropTypes.elementType.isRequired,
+  label: PropTypes.string.isRequired,
+  selected: PropTypes.bool.isRequired,
+  onClick: PropTypes.func.isRequired,
+};
 export default CategoryInput;

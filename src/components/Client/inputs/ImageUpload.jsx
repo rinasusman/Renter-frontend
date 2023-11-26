@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import axios from 'axios';
 import { TbPhotoPlus } from 'react-icons/tb';
+import PropTypes from 'prop-types';
 
 const ImageUpload = ({ onChange, value }) => {
     const fileInputRef = useRef(null);
@@ -66,5 +67,8 @@ const ImageUpload = ({ onChange, value }) => {
         </div>
     );
 };
-
+ImageUpload.propTypes = {
+    onChange: PropTypes.func,
+    value: PropTypes.string,
+};
 export default ImageUpload;

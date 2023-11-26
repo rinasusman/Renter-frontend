@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import Button from '../../Button'
 import userAxios from '../../../Axios/guestAxios';
+import PropTypes from 'prop-types';
 const ResevationCard = ({ reservation }) => {
 
 
@@ -33,7 +33,7 @@ const ResevationCard = ({ reservation }) => {
         <div className='flex flex-col'>
             <div className='flex flex-row gap-5'>
                 <div className='w-[150px] h-[150px] ' >
-                    <img fill className='rounded-2xl' src={imageSrc} alt="" />
+                    <img className='rounded-2xl' src={imageSrc} alt="" />
                 </div>
                 <div className='flex flex-col'>
                     <div className='font-semibold'>
@@ -65,5 +65,14 @@ const ResevationCard = ({ reservation }) => {
         </div>
     )
 }
-
+ResevationCard.propTypes = {
+    reservation: PropTypes.shape({
+        startDate: PropTypes.string.isRequired,
+        endDate: PropTypes.string.isRequired,
+        item: PropTypes.array.isRequired,
+        status: PropTypes.string.isRequired,
+        userId: PropTypes.object.isRequired,
+        _id: PropTypes.string.isRequired,
+    }).isRequired,
+};
 export default ResevationCard

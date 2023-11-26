@@ -4,6 +4,7 @@ import { MdOutlineFeedback } from 'react-icons/md';
 import useFeedbackModal from '../../../Hooks/useFeedbackModal';
 import Button from '../../Button';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 const TripCard = ({ booking, activeTab }) => {
 
 
@@ -48,7 +49,7 @@ const TripCard = ({ booking, activeTab }) => {
         <div className='flex flex-col'>
             <div className='flex flex-row gap-5'>
                 <div className='w-[150px] h-[150px] ' >
-                    <img fill className='rounded-2xl' src={booking?.home?.imageSrc || 'default-image-url'} alt="" />
+                    <img className='rounded-2xl' src={booking?.home?.imageSrc || 'default-image-url'} alt="" />
                 </div>
                 <div className='flex flex-col'>
                     <div>
@@ -70,5 +71,18 @@ const TripCard = ({ booking, activeTab }) => {
         </div>
     );
 };
-
+TripCard.propTypes = {
+    booking: PropTypes.shape({
+        _id: PropTypes.string,
+        home: PropTypes.shape({
+            id: PropTypes.string,
+            imageSrc: PropTypes.string,
+            location: PropTypes.string,
+            title: PropTypes.string,
+        }),
+        startDate: PropTypes.string,
+        endDate: PropTypes.string,
+    }),
+    activeTab: PropTypes.string,
+};
 export default TripCard

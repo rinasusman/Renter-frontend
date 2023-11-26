@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 
 
@@ -12,8 +12,6 @@ import Heading from '../../Heading.jsx';
 import Modal from './Modal.jsx';
 import Input from '../inputs/Input.jsx';
 
-
-import useResetpassModal from '../../../Hooks/useResetpassModal.js';
 import useFeedbackModal from '../../../Hooks/useFeedbackModal.js';
 import { FaRegStar, FaStar } from 'react-icons/fa';
 
@@ -23,7 +21,7 @@ const FeedbackModal = () => {
     const feedbackModal = useFeedbackModal();
     const [selectedStars, setSelectedStars] = useState([false, false, false, false, false]);
 
-    const [errorMessage, setErrorMessage] = useState("");
+
     const [isLoading, setIsLoading] = useState(false);
 
 

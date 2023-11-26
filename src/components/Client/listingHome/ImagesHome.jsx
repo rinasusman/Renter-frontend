@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-
+import PropTypes from 'prop-types';
 const ImagesHome = ({ data }) => {
     const [selectedImage, setSelectedImage] = useState(null);
     if (!data) {
@@ -35,7 +35,7 @@ const ImagesHome = ({ data }) => {
                 {imageUrl && imageUrl.length > 0 && (
                     imageUrl.map((url, index) => (
                         <img
-                            fill
+
                             key={index}
                             src={url}
                             className="object-cover w-[33vw] h-[40vh] cursor-pointer"
@@ -68,6 +68,10 @@ const ImagesHome = ({ data }) => {
         </>
 
     )
-}
-
+};
+ImagesHome.propTypes = {
+    data: PropTypes.shape({
+        imageUrl: PropTypes.arrayOf(PropTypes.string),
+    }),
+};
 export default ImagesHome

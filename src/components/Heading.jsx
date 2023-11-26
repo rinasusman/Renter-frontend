@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const Heading = ({ title, subtitle, center }) => {
     return (
@@ -11,6 +12,11 @@ const Heading = ({ title, subtitle, center }) => {
             </div>
         </div>
     );
-}
+};
 
+Heading.propTypes = {
+    title: PropTypes.string.isRequired,
+    subtitle: PropTypes.string.isRequired,
+    center: PropTypes.bool,
+};
 export default Heading;

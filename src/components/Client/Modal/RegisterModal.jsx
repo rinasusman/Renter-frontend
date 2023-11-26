@@ -1,11 +1,9 @@
 import React, { useState, useCallback } from 'react';
-import { FcGoogle } from 'react-icons/fc';
 import { useForm } from 'react-hook-form';
 import toast, { Toaster } from 'react-hot-toast';
 import zxcvbn from 'zxcvbn';
 import userAxios from '../../../Axios/guestAxios.js';
 import Heading from '../../Heading';
-import Button from '../../Button';
 import Modal from './Modal';
 import Input from '../inputs/Input';
 import useRegisterModal from '../../../Hooks/useRegisterModal';
@@ -17,7 +15,7 @@ const RegisterModal = () => {
     const registerModal = useRegisterModal();
     const loginModal = useLoginModal();
     const otpModal = useOtpModal();
-    const [error, setError] = useState('');
+
     const [isLoading, setIsLoading] = useState(false);
     const [passwordMatchError, setPasswordMatchError] = useState(false);
     const [passwordStrengthColor, setPasswordStrengthColor] = useState('transparent');
@@ -65,10 +63,10 @@ const RegisterModal = () => {
             }
         } catch (e) {
             if (axios.isAxiosError(e)) {
-                setError(e.response?.data?.error || 'An error occurred');
+
                 toast.error(e.response?.data?.error || '');
             } else {
-                setError('An error occurred');
+
                 toast.error('An error occurred');
             }
         } finally {

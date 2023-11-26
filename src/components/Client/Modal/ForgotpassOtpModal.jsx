@@ -21,7 +21,6 @@ const ForgotpassOtpModal = () => {
     const otpModal = useForgotpassOtpModal();
     const resetpassModal = useResetpassModal();
     const [timer, setTimer] = useState(120);
-    const [errorMessage, setErrorMessage] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const [showResendLink, setShowResendLink] = useState(false);
 
@@ -76,18 +75,16 @@ const ForgotpassOtpModal = () => {
                 resetpassModal.onOpen();
             }
             else {
-                setErrorMessage(response.data.message);
+                window.alert("failed")
             }
         } catch (e) {
             const error = e;
             if (error.response) {
-                setErrorMessage(error.response.data.message);
+                window.alert("failed")
             } else if (error.request) {
-                setErrorMessage(
-                    "No response from server. Please check your network connection."
-                );
+                window.alert("failed")
             } else {
-                setErrorMessage(error.message);
+                window.alert("failed")
             }
 
         }

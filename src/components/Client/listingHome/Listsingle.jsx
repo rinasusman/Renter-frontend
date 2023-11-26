@@ -6,7 +6,7 @@ import userAxios from "../../../Axios/guestAxios.js";
 import ListingReservation from './ListingReservation';
 import Review from '../Review/Review.jsx';
 import ImagesHome from './ImagesHome.jsx';
-;
+
 const Listsingle = () => {
 
     const { id } = useParams();

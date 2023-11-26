@@ -3,6 +3,7 @@ import Container from '../../Container'
 import Heading from '../../Heading'
 import ListingCard from '../listingHome/ListingCard'
 import userAxios from '../../../Axios/guestAxios';
+import PropTypes from 'prop-types';
 const FavoritesList = ({
     title = "Favorite List Empty",
     subtitle = "Please add your favorite", }) => {
@@ -81,5 +82,9 @@ const FavoritesList = ({
         </Container>
     )
 }
+FavoritesList.propTypes = {
+    title: PropTypes.string,
+    subtitle: PropTypes.string,
+};
 
 export default FavoritesList

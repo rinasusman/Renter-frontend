@@ -1,6 +1,6 @@
 import React from 'react';
 import { BiRupee } from "react-icons/bi";
-
+import PropTypes from 'prop-types';
 const Input = ({
     id,
     label,
@@ -75,6 +75,20 @@ const Input = ({
             >{label}</label>
         </div>
     );
-}
+};
+
+Input.propTypes = {
+    id: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
+    type: PropTypes.string,
+    formatPrice: PropTypes.bool,
+    required: PropTypes.bool,
+    register: PropTypes.func,
+    value: PropTypes.string,
+    onChange: PropTypes.func,
+    errors: PropTypes.object,
+    maxLength: PropTypes.number,
+    height: PropTypes.number,
+};
 
 export default Input;

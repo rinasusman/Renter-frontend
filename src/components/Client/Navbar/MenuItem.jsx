@@ -1,5 +1,5 @@
 import React from "react";
-
+import PropTypes from 'prop-types';
 const MenuItem = ({ onClick, label }) => {
   return (
     <div onClick={onClick} className="
@@ -13,6 +13,9 @@ const MenuItem = ({ onClick, label }) => {
     </div>
   );
 };
-
+MenuItem.propTypes = {
+  onClick: PropTypes.func.isRequired,
+  label: PropTypes.string.isRequired,
+};
 export default MenuItem;
 

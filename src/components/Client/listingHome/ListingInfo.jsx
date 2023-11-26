@@ -1,5 +1,8 @@
 import React from 'react'
 import { IoMdChatbubbles } from "react-icons/io";
+import PropTypes from 'prop-types';
+
+
 const ListingInfo = ({ data }) => {
     console.log(data, "nameeeeeeeeeeeeeeeeee");
     if (!data) {
@@ -73,5 +76,15 @@ const ListingInfo = ({ data }) => {
         </div>
     )
 }
-
+ListingInfo.propTypes = {
+    data: PropTypes.shape({
+        userId: PropTypes.shape({
+            name: PropTypes.string,
+        }),
+        guestCount: PropTypes.number,
+        roomCount: PropTypes.number,
+        bathroomCount: PropTypes.number,
+        description: PropTypes.string,
+    }),
+};
 export default ListingInfo

@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useCallback } from "react";
 
 import { FcGoogle } from "react-icons/fc";
 
@@ -11,7 +11,7 @@ import Modal from "./Modal";
 import Input from "../inputs/Input";
 import useRegisterModal from "../../../Hooks/useRegisterModal";
 import useLoginModal from "../../../Hooks/useLoginModal";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useLoginMutation } from "../../../Redux/container/userApiSlice.js";
 import { setUserLogin } from "../../../Redux/container/userAuth.slice.js";
 
@@ -26,8 +26,8 @@ const LoginModal = () => {
   const emailModal = useEmailModal();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [login, { isLoadings }] = useLoginMutation();
-  const [isLoading, setIsLoading] = useState(false);
+  const [login] = useLoginMutation();
+
 
 
   const {
@@ -54,14 +54,13 @@ const LoginModal = () => {
 
 
   const onSubmit = async (data) => {
-    console.log(data, ">>>>>>>>>>>>>>>>>>>>>>>>>>")
-    setIsLoading(true);
+
 
     try {
 
       const res = await login({ data }).unwrap();
 
-
+      console.log(res, ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>iiiiiii")
 
       if (res.userSignUp.message === 'You are logged') {
         dispatch(setUserLogin({ ...res }));
@@ -75,7 +74,6 @@ const LoginModal = () => {
         navigate("/");
       }
       else if (res.message === 'User not registered') {
-        // User is not registered
         toast.error("User not registered. Please sign up.");
       }
       else {

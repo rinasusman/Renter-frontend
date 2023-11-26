@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Button from '../../Button'
 import DateCalendar from '../inputs/DateCalnder'
 import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types';
 
 const ListingReservation = ({ data }) => {
     console.log(data, "reser:")
@@ -111,6 +112,16 @@ const ListingReservation = ({ data }) => {
 
         </div>
     )
-}
+};
+
+ListingReservation.propTypes = {
+    data: PropTypes.shape({
+        guestCount: PropTypes.number,
+        title: PropTypes.string,
+        price: PropTypes.number,
+        imageSrc: PropTypes.string,
+        _id: PropTypes.string,
+    }),
+};
 
 export default ListingReservation

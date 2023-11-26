@@ -1,12 +1,65 @@
-import React, { useState } from 'react'
-import Container from '../../Container'
-import Heading from '../../Heading'
-import Conversation from './Conversation'
-import ChatBox from './ChatBox'
+import React, { useEffect, useRef, useState } from "react";
+import Container from "../../Container";
+import Conversation from "./Conversation";
+import ChatBox from "./ChatBox";
+import { useSelector } from "react-redux";
+import { userChats } from "../../../Api/ChatRequests";
+import { io } from "socket.io-client";
+
 
 const Chat = () => {
-    const [message, setMessage] = useState('')
-    const [messages, setMessages] = useState([])
+
+    const { userToken } = useSelector((state) => state.auth)
+    const user = userToken.userdata
+    const socket = useRef();
+    const [chats, setChats] = useState([])
+    const [currentChat, setCurrentChat] = useState(null);
+    const [onlineUsers, setOnlineUsers] = useState([]);
+    const [sendMessage, setSendMessage] = useState(null);
+    const [receivedMessage, setReceivedMessage] = useState(null);
+
+
+    useEffect(() => {
+        const getChats = async () => {
+            try {
+                const { data } = await userChats(user._id);
+                setChats(data);
+                console.log(data, "chaaaaaaaaaaaat")
+            } catch (error) {
+                console.log(error);
+            }
+        };
+        getChats();
+    }, [user._id]);
+
+    useEffect(() => {
+        socket.current = io("http://localhost:5000/");
+        socket.current.emit("new-user-add", user._id);
+        socket.current.on("get-users", (users) => {
+            setOnlineUsers(users);
+            console.log("Online users:", users);
+        });
+    }, [user]);
+
+
+    // Send Message to socket server
+    useEffect(() => {
+        if (sendMessage !== null) {
+            socket.current.emit("send-message", sendMessage);
+        }
+    }, [sendMessage]);
+
+
+    // Get the message from socket server
+    useEffect(() => {
+        socket.current.on("recieve-message", (data) => {
+            console.log(data)
+            setReceivedMessage(data);
+        }
+
+        );
+    }, []);
+
     return (
         <Container>
             <div className='
@@ -42,15 +95,22 @@ const Chat = () => {
                            flex-col 
                            gap-4
                            '>
-                            <div>
-                                <Conversation />
-                                <Conversation />
-                                <Conversation />
-                                <Conversation />
-                                <Conversation />
-                                <Conversation />
+                            {chats.map((chat) => (
+                                <div key={chat._id}
+                                    onClick={() => {
+                                        setCurrentChat(chat)
+                                    }}
+                                >
+                                    <Conversation
+                                        data={chat}
+                                        currentUser={user._id}
 
-                            </div>
+                                    />
+                                </div>
+                            ))}
+
+
+
                         </div>
                     </div>
                 </div>
@@ -61,12 +121,17 @@ const Chat = () => {
                 flex-col
                 gap-4
                 '>
-                    <ChatBox />
+                    <ChatBox
+                        chat={currentChat}
+                        currentUser={user._id}
+                        setSendMessage={setSendMessage}
+                        receivedMessage={receivedMessage}
+                    />
                 </div>
 
             </div>
-        </Container>
-    )
-}
+        </Container >
+    );
+};
 
-export default Chat
+export default Chat;

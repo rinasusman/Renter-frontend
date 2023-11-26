@@ -9,10 +9,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLogoutMutation } from "../../../Redux/container/userApiSlice";
 import { setUserLogout } from '../../../Redux/container/userAuth.slice'
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import useRentModal from "../../../Hooks/useRentModal";
 
-const UserMenu = ({ }) => {
+const UserMenu = () => {
 
 
   const { userToken } = useSelector((state) => state.auth)

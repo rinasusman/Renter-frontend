@@ -3,7 +3,7 @@ import Heading from '../../Heading';
 import ListingCardSingle from '../listingHome/ListingCardSingle';
 import Container from '../../../components/Container.jsx';
 import userAxios from '../../../Axios/guestAxios';
-
+import PropTypes from 'prop-types';
 
 const Myproperty = ({
     title = "No Home is added",
@@ -76,5 +76,8 @@ const Myproperty = ({
         </Container>
     );
 };
-
+Myproperty.propTypes = {
+    title: PropTypes.string,
+    subtitle: PropTypes.string,
+};
 export default Myproperty;

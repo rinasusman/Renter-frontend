@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import Button from '../../Button'
 import userAxios from '../../../Axios/guestAxios';
 import { useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import Swal from 'sweetalert2';
 
 const ListingCardSingle = ({ data, onDelete }) => {
@@ -31,7 +32,7 @@ const ListingCardSingle = ({ data, onDelete }) => {
                 };
                 if (headers.Authorization) {
                     userAxios.delete(`/listdelete/${data._id}`, { headers })
-                        .then(response => {
+                        .then(() => {
 
                             onDelete(data._id);
                             window.location.reload();
@@ -62,7 +63,7 @@ const ListingCardSingle = ({ data, onDelete }) => {
           "
                 >
 
-                    <img fill
+                    <img
                         className="object-cover 
               h-full 
               w-full 
@@ -111,6 +112,15 @@ const ListingCardSingle = ({ data, onDelete }) => {
         </div >
 
     )
-}
-
+};
+ListingCardSingle.propTypes = {
+    data: PropTypes.shape({
+        location: PropTypes.string,
+        category: PropTypes.string,
+        price: PropTypes.number,
+        imageSrc: PropTypes.string,
+        _id: PropTypes.string,
+    }),
+    onDelete: PropTypes.func,
+};
 export default ListingCardSingle

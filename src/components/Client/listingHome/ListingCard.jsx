@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from 'react'
-import Button from '../../Button'
-import userAxios from "../../../Axios/guestAxios.js";
+import React from 'react'
 import HeartButton from '../../HeartButton';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 const ListingCard = ({ data, isHeartFilled, toggleHeart }) => {
 
     const { location, category, price, imageSrc } = data;
-    console.log(data._id, "llllllllllll")
+
 
 
 
@@ -29,7 +28,7 @@ const ListingCard = ({ data, isHeartFilled, toggleHeart }) => {
           "
                 >
 
-                    <img fill
+                    <img
                         className="object-cover 
               h-full 
               w-full 
@@ -70,6 +69,17 @@ const ListingCard = ({ data, isHeartFilled, toggleHeart }) => {
         </div >
 
     )
-}
+};
+ListingCard.propTypes = {
+    data: PropTypes.shape({
+        location: PropTypes.string,
+        category: PropTypes.string,
+        price: PropTypes.number,
+        imageSrc: PropTypes.string,
+        _id: PropTypes.string,
+    }),
+    isHeartFilled: PropTypes.bool,
+    toggleHeart: PropTypes.func,
+};
 
 export default ListingCard

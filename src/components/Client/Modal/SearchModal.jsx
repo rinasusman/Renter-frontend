@@ -22,7 +22,6 @@ const STEPS = {
 const SearchModal = () => {
   const searchModal = useSearchModal();
   const [selectedRange, setSelectedRange] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
   const [step, setStep] = useState(STEPS.CATEGORY);
   const [placeValue, setPlaceValue] = useState('');
   const [guestCount, setGuestValue] = useState(1)
@@ -86,7 +85,7 @@ const SearchModal = () => {
     return "Back";
   }, [step]);
 
-  const onSubmit = async (data) => {
+  const onSubmit = async () => {
     if (step !== STEPS.INFO) {
       return onNext();
     }
@@ -112,7 +111,7 @@ const SearchModal = () => {
     }
 
     console.log(payload, "ddddddddddddddddddddddddd")
-    setIsLoading(true);
+
     try {
       const response = await userAxios.get('/getSearchHomeList', {
         params: {
@@ -130,7 +129,7 @@ const SearchModal = () => {
 
       searchModal.onClose()
     } catch (e) {
-
+      console.log(e.message)
     }
   };
 
