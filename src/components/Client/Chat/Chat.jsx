@@ -10,14 +10,14 @@ import { io } from "socket.io-client";
 const Chat = () => {
 
     const { userToken } = useSelector((state) => state.auth)
-    const user = userToken.userdata
+    const user = userToken && userToken.userdata ? userToken.userdata : null;
     const socket = useRef();
     const [chats, setChats] = useState([])
     const [currentChat, setCurrentChat] = useState(null);
     const [onlineUsers, setOnlineUsers] = useState([]);
     const [sendMessage, setSendMessage] = useState(null);
     const [receivedMessage, setReceivedMessage] = useState(null);
-
+    console.log(onlineUsers)
 
     useEffect(() => {
         const getChats = async () => {
@@ -52,8 +52,9 @@ const Chat = () => {
 
     // Get the message from socket server
     useEffect(() => {
+        console.log("Setting up recieve-message listener");
         socket.current.on("recieve-message", (data) => {
-            console.log(data)
+            console.log("Message received:", data);
             setReceivedMessage(data);
         }
 
@@ -96,9 +97,9 @@ const Chat = () => {
                            gap-4
                            '>
                             {chats.map((chat) => (
-                                <div key={chat._id}
+                                <div key={chat && chat._id ? chat._id : 'fallbackId'}
                                     onClick={() => {
-                                        setCurrentChat(chat)
+                                        setCurrentChat(chat && chat._id ? chat : null)
                                     }}
                                 >
                                     <Conversation

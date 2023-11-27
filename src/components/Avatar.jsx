@@ -12,6 +12,6 @@ const Avatar = ({ src }) => {
   );
 };
 Avatar.propTypes = {
-  src: PropTypes.string, // You can adjust the type based on your requirements
+  src: PropTypes.string,
 };
 export default Avatar;

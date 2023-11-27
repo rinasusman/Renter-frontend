@@ -37,15 +37,7 @@ const Conversation = ({ data, currentUser }) => {
          cursor-pointer
         '>
                 <div className='flex flex-row  items-center gap-1'>
-                    <div className='
-                 absolute
-             
-                 left-13
-                 w-4 
-                 h-4 
-                 bg-lime-600
-                 rounded-full'>
-                    </div>
+
                     <div className="flex items-center justify-center bg-rose-500 rounded-full  w-12 
                  h-12 ">
                         <span className="font-semibold text-2xl text-white">{firstLetter}</span>

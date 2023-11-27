@@ -78,9 +78,15 @@ const ChatBox = ({ chat, currentUser, setSendMessage, receivedMessage }) => {
         }
 
     }, [receivedMessage])
+
     useEffect(() => {
         scroll.current?.scrollIntoView({ behavior: "smooth" });
-    }, [messages])
+    }, [messages]);
+
+    useEffect(() => {
+        // Scroll to the bottom when component mounts or when messages change
+        scroll.current?.scrollIntoView({ behavior: "smooth" });
+    }, []);
     return (
         <>
             <div className='
@@ -135,17 +141,17 @@ const ChatBox = ({ chat, currentUser, setSendMessage, receivedMessage }) => {
                         </div>
                         <hr />
                         {/* chat-body */}
-                        <div ref={scroll} className='w-[875px] h-[380px] absolute top-[90px] overflow-y-scroll' >
+                        <div ref={scroll} className='w-[875px] h-[380px] absolute top-[90px] overflow-y-scroll ' >
                             <div className='
-                        flex
-                        flex-col
-                        gap-2
-                        p-6
-                      '
+                            flex
+                            flex-col
+                            gap-2
+                            p-6
+                            '
                             >
                                 {messages.map((message) => (
                                     <>
-                                        <div className={`message ${message.senderId === currentUser ? 'text-white p-2.5 rounded-br-[1rem] rounded-tr-[0] max-w-[28rem] w-auto flex flex-col gap-2 self-end rounded-bl-[1rem] rounded-tl-[1rem] bg-gradient-to-r from-sky-500 to-blue-500' : 'text-white p-2.5 rounded-br-[1rem] rounded-tr-[1rem] max-w-[28rem] w-auto flex flex-col gap-2 self-start rounded-bl-[1rem] rounded-tl-[0] bg-gradient-to-r from-sky-500 to-blue-500'}`}>
+                                        <div className={`message ${message.senderId === currentUser ? 'text-white p-2.5 rounded-br-[1rem] rounded-tr-[0] max-w-[28rem] w-auto flex flex-col gap-2 self-end rounded-bl-[1rem] rounded-tl-[1rem] bg-gradient-to-r from-sky-500 to-blue-500' : 'text-white p-2.5 rounded-br-[1rem] rounded-tr-[1rem] max-w-[28rem] w-auto flex flex-col gap-2 self-start rounded-bl-[1rem] rounded-tl-[0] bg-gradient-to-r  from-rose-500 to-red-500'}`}>
                                             <span>{message.text}</span>{" "}
                                             <span className='text-neutral-300 self-end text-xs'>{format(message.createdAt)}</span>
                                         </div>

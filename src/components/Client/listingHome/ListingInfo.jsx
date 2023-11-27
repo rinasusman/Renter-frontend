@@ -1,6 +1,9 @@
 import React from 'react'
 import { IoMdChatbubbles } from "react-icons/io";
 import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
+import { createChat } from '../../../Api/ChatRequests';
+import { useNavigate } from 'react-router-dom';
 
 
 const ListingInfo = ({ data }) => {
@@ -9,7 +12,37 @@ const ListingInfo = ({ data }) => {
         return null;
     }
     const hostName = data.userId.name || "Host's Name Not Available";
+    const { userToken } = useSelector((state) => state.auth)
+    const user = userToken.userdata
+    const senderId = user._id || "senderid not available"
+    const receiverId = data.userId._id || "reciver's ID Not Available";
     const firstLetter = hostName ? hostName.charAt(0).toUpperCase() : "";
+    const navigate = useNavigate()
+
+    const handleChat = async (e) => {
+        e.preventDefault()
+        const payload = {
+            senderId: senderId,
+            receiverId: receiverId
+        }
+
+
+        try {
+            const datas = await createChat(payload);
+            const chatData = datas.data;
+            if (chatData) {
+                navigate("/messages")
+            }
+            else {
+                console.log("error")
+            }
+        }
+        catch
+        {
+            console.log("error")
+        }
+    }
+
     return (
         <div className="col-span-4 flex flex-col gap-8">
             <div className="flex flex-col gap-2">
@@ -58,7 +91,7 @@ const ListingInfo = ({ data }) => {
                     description={category?.description}
                 />
             )} */}
-            <div className='flex flex-row gap-3 cursor-pointer font-semibold items-center'>
+            <div className='flex flex-row gap-3 cursor-pointer font-semibold items-center' onClick={handleChat}>
                 <div className='bg-rose-500 p-1 rounded-full'>
                     <IoMdChatbubbles size={28} color='white' />
                 </div>
@@ -79,6 +112,7 @@ const ListingInfo = ({ data }) => {
 ListingInfo.propTypes = {
     data: PropTypes.shape({
         userId: PropTypes.shape({
+            _id: PropTypes.string,
             name: PropTypes.string,
         }),
         guestCount: PropTypes.number,

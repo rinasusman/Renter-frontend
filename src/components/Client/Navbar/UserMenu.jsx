@@ -45,8 +45,13 @@ const UserMenu = () => {
 
     navigate("/myproperties")
   };
+
+  const handleMessage = () => {
+
+    navigate("/messages")
+  };
   const handleFavoritesClick = () => {
-    // Open the sign-up modal by calling the onOpen function from the registerModal
+
     navigate("/favorites")
   };
   const handleTripClick = () => {
@@ -147,7 +152,7 @@ const UserMenu = () => {
             {userToken && userToken.userSignUp && userToken.userSignUp.message === 'You are logged' ? (
               <>
                 <MenuItem label="My trips" onClick={handleTripClick} />
-                <MenuItem label="Messages" />
+                <MenuItem label="Messages" onClick={handleMessage} />
                 <MenuItem label="My favorites" onClick={handleFavoritesClick} />
                 <MenuItem label="My reservations" onClick={handleReservationClick} />
                 <MenuItem label="My properties" onClick={handlePropertyClick} />

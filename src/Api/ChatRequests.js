@@ -3,7 +3,7 @@ import userAxios from '../Axios/guestAxios';
 
 
 
-export const createChat = (data) => userAxios.post('/createChat', data);
+export const createChat = (datas) => userAxios.post('/createChat', datas);
 
 export const userChats = (id) => userAxios.get(`/getchat/${id}`);
 
