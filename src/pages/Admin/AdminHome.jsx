@@ -2,6 +2,7 @@ import React from 'react'
 import SideNav from '../../components/Admin/Sidenav/SideNav'
 import Dashboard from '../../components/Admin/Dashboard'
 
+import ReportModal from '../../components/Admin/ReportModal'
 
 
 const AdminHome = () => {
@@ -12,6 +13,7 @@ const AdminHome = () => {
       </div>
       <div className='basis-[87%] border'>
         <Dashboard />
+        <ReportModal />
       </div>
     </div>
 

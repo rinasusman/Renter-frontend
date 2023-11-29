@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import Heading from '../Heading';
 import adminAxios from '../../Axios/adminAxios';
-import { toast } from 'react-toastify';
+import PropTypes from 'prop-types';
+
 const Bookings = ({
     title = "Booking List is Empty",
     subtitle = ".",
@@ -9,7 +10,7 @@ const Bookings = ({
 }) => {
     const [ClientDetails, setClientDetails] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 5;
+    const itemsPerPage = 4;
 
     const fetchClientDetails = async () => {
         try {
@@ -27,14 +28,15 @@ const Bookings = ({
     }, []);
 
     const getStatusColor = (status) => {
-        switch (status.toLowerCase()) {
+        console.log('Status:', status);
+        switch ((status ?? '').toLowerCase()) {
             case 'booked':
                 return 'text-orange-500';
             case 'checkin':
                 return 'text-green-500';
             case 'checkout':
                 return 'text-blue-500';
-            case 'cancelled':
+            case 'cancel':
                 return 'text-red-500';
             default:
                 return '';
@@ -159,5 +161,9 @@ const Bookings = ({
         </div >
     )
 }
+Bookings.propTypes = {
+    title: PropTypes.string,
+    subtitle: PropTypes.string,
+};
 
 export default Bookings

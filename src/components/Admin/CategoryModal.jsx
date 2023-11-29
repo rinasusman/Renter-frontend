@@ -1,12 +1,9 @@
-import React, { useState, useCallback, useEffect } from "react";
-
-import { FcGoogle } from "react-icons/fc";
-import toast, { Toaster } from 'react-hot-toast';
+import React, { useState } from "react";
+import toast from 'react-hot-toast';
 import { useForm } from "react-hook-form";
 import axios from 'axios';
 import adminAxios from '../../Axios/adminAxios.js';
 import Modal from "../Client/Modal/Modal.jsx";
-import Heading from "../Heading.jsx";
 import Input from "../Client/inputs/Input.jsx";
 import useCategoryModal from "../../Hooks/useCategoryModal.js";
 import { TbBeach, TbMountain, TbPool } from 'react-icons/tb';
@@ -115,14 +112,13 @@ const CategoryModal = () => {
   const navigate = useNavigate();
 
   const loginModal = useCategoryModal();
-  const [error, setError] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
+
   const [selectedCategory, setSelectedCategory] = useState(null);
 
   const {
     register,
     handleSubmit,
-    reset,
+
     formState: {
       errors,
     },
@@ -134,17 +130,11 @@ const CategoryModal = () => {
     },
   });
 
-  // React.useEffect(() => {
-  //   reset({
-  //     name: "",
-  //     description: "",
-  //   });
-  // }, [reset]);
 
 
 
   const onSubmit = async (data) => {
-    setIsLoading(true);
+
     if (selectedCategory) {
       const payload = {
         name: selectedCategory.label,
@@ -163,26 +153,24 @@ const CategoryModal = () => {
           navigate('/category');
         }
         else {
-          setError("Category already exists");
+
           toast.error("Category already exists")
         }
 
       } catch (e) {
         if (axios.isAxiosError(e)) {
-          setError(e.response?.data?.error || 'An error occurred');
+
           toast.error(e.response?.data?.error || '');
         } else {
-          setError('An error occurred');
+
           toast.error('An error occurred');
         }
-      } finally {
-        setIsLoading(false);
       }
     } else {
       // Handle the case where no category is selected
-      setError('Please select a category');
+
       toast.error('Please select a category');
-      setIsLoading(false);
+
     }
 
   };
@@ -193,15 +181,7 @@ const CategoryModal = () => {
 
   const bodyContent = (
     <div className="flex flex-col gap-4">
-      {/* <Input
-        id="name"
-        label="Name"
 
-        // disabled={isLoading}
-        register={register}
-        errors={errors}
-        required
-      /> */}
       <div
         className="
           grid 

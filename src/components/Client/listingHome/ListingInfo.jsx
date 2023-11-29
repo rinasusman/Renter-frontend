@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { createChat } from '../../../Api/ChatRequests';
 import { useNavigate } from 'react-router-dom';
+import useLoginModal from '../../../Hooks/useLoginModal';
 
 
 const ListingInfo = ({ data }) => {
@@ -11,10 +12,11 @@ const ListingInfo = ({ data }) => {
     if (!data) {
         return null;
     }
+    const loginModal = useLoginModal();
     const hostName = data.userId.name || "Host's Name Not Available";
     const { userToken } = useSelector((state) => state.auth)
-    const user = userToken.userdata
-    const senderId = user._id || "senderid not available"
+    const user = userToken && userToken.userdata ? userToken.userdata : null;
+    const senderId = user ? user._id : "senderid not available";
     const receiverId = data.userId._id || "reciver's ID Not Available";
     const firstLetter = hostName ? hostName.charAt(0).toUpperCase() : "";
     const navigate = useNavigate()
@@ -28,13 +30,18 @@ const ListingInfo = ({ data }) => {
 
 
         try {
-            const datas = await createChat(payload);
-            const chatData = datas.data;
-            if (chatData) {
-                navigate("/messages")
-            }
-            else {
-                console.log("error")
+            if (user) {
+                const datas = await createChat(payload);
+                const chatData = datas.data;
+                console.log(chatData, "chatdata:")
+                if (chatData) {
+                    navigate("/messages")
+                }
+                else {
+                    console.log("error")
+                }
+            } else {
+                loginModal.onOpen();
             }
         }
         catch
@@ -84,13 +91,7 @@ const ListingInfo = ({ data }) => {
                 </div>
             </div>
             <hr />
-            {/* {category && (
-                <ListingCategory
-                    icon={category.icon}
-                    label={category?.label}
-                    description={category?.description}
-                />
-            )} */}
+
             <div className='flex flex-row gap-3 cursor-pointer font-semibold items-center' onClick={handleChat}>
                 <div className='bg-rose-500 p-1 rounded-full'>
                     <IoMdChatbubbles size={28} color='white' />

@@ -6,7 +6,7 @@ const Login = () => {
 
   const navigate = useNavigate();
 
-  const [isLoading, setIsLoading] = useState(false);
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -18,7 +18,7 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsLoading(true);
+
     console.log(email, password, "ddddddddddddddddddddd")
     try {
 
@@ -42,9 +42,7 @@ const Login = () => {
       console.error(error);
       toast.error("An error occurred while logging in");
     }
-    finally {
-      setIsLoading(false);
-    }
+
   }
   return (
     <>

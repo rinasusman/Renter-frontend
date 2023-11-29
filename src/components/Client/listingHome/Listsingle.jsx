@@ -11,14 +11,18 @@ const Listsingle = () => {
 
     const { id } = useParams();
     const [listingData, setListingData] = useState(null);
+    const [bookingData, setBookingData] = useState([])
     const [feedbackData, setFeedbackData] = useState([]);
     console.log(listingData, "dtaaaaaaa9999999999")
+    console.log(bookingData, "dtaaaaaaa000000000000000")
     console.log(feedbackData, "feedback:::::")
     useEffect(() => {
         const fetchListingData = async () => {
             try {
                 const response = await userAxios.get(`/getListingById/${id}`);
-                setListingData(response.data);
+                console.log(response.data, "responsesingle:::::")
+                setListingData(response.data.listing);
+                setBookingData(response.data.bookingDetails)
                 const feedbackResponse = await userAxios.get(`/getFeedbackByHome/${id}`);
                 setFeedbackData(feedbackResponse.data);
             } catch (error) {
@@ -70,6 +74,7 @@ const Listsingle = () => {
                     >
                         <ListingReservation
                             data={listingData}
+                            bookingData={bookingData}
                         />
                     </div>
 
@@ -118,7 +123,7 @@ const Listsingle = () => {
                 {feedbackData.map((feedback) => (
                     <Review
                         key={feedback._id} // Use a unique key for each Review component
-                        userName={feedback.userId.name} // Assuming you have a userName property in your feedback data
+                        userName={feedback.userId?.name} // Assuming you have a userName property in your feedback data
                         star={feedback.star}
                         feedbackDate={feedback.createDate}
                         comment={feedback.feedback}

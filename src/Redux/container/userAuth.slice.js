@@ -1,6 +1,6 @@
 // userAuth.slice.js
 import { createSlice } from "@reduxjs/toolkit";
-const storedUserToken = localStorage.getItem('userToken');
+
 const initialState = {
 
   userToken: localStorage.getItem('userToken') ? JSON.parse(localStorage.getItem('userToken')) : null
@@ -14,7 +14,7 @@ const userAuthSlice = createSlice({
       state.userToken = action.payload;
       localStorage.setItem('userToken', JSON.stringify(action.payload));
     },
-    setUserLogout: (state, action) => {
+    setUserLogout: (state) => {
       state.userToken = null;
       localStorage.removeItem('userToken');
     },

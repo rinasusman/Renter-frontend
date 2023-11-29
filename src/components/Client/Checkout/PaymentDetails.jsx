@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
 import Button from '../../Button'
-
-import { useForm } from 'react-hook-form';
 import DropDown from '../inputs/DropDown';
 // import useRazorpay from 'react-razorpay';
 import userAxios from '../../../Axios/guestAxios';
@@ -15,12 +13,13 @@ const PaymentDetails = ({ data, total }) => {
     const startDateObject = new Date(startDate);
     const day = startDateObject.getDate();
     const month = startDateObject.toLocaleString('default', { month: 'short' });
-
+    const Year = startDate.getFullYear();
     const endDateObject = new Date(endDate);
     const endday = endDateObject.getDate();
     const endmonth = endDateObject.toLocaleString('default', { month: 'short' });
-    const formattedStartDate = `${day}-${month}`;
-    const formattedEndDate = `${endday}-${endmonth}`;
+    const endYear = endDate.getFullYear();
+    const formattedStartDate = `${day}-${month}-${Year}`;
+    const formattedEndDate = `${endday}-${endmonth}-${endYear}`;
 
 
 
@@ -94,19 +93,7 @@ const PaymentDetails = ({ data, total }) => {
 
 
 
-    const {
-        // register,
-        // handleSubmit,
-        // reset,
-        formState: { }
 
-    } = useForm({
-        defaultValues: {
-            email: '',
-
-
-        },
-    });
     const [selectedPaymentMethod, setSelectedPaymentMethod] = useState('upi');
     const paymentMethodOptions = [
         { value: 'upi', label: 'UPI' },

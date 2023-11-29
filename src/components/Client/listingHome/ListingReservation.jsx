@@ -4,8 +4,9 @@ import DateCalendar from '../inputs/DateCalnder'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types';
 
-const ListingReservation = ({ data }) => {
+const ListingReservation = ({ data, bookingData }) => {
     console.log(data, "reser:")
+    console.log(bookingData, "reservation date:")
     const [selectedRange, setSelectedRange] = useState(null);
     if (!data) {
 
@@ -84,6 +85,7 @@ const ListingReservation = ({ data }) => {
             <div className="flex justify-center"> {/* Center the DateCalendar component */}
                 <DateCalendar
                     setSelectedRange={setSelectedRange}
+                    bookingData={bookingData}
                 />
             </div>
             <hr />
@@ -122,6 +124,7 @@ ListingReservation.propTypes = {
         imageSrc: PropTypes.string,
         _id: PropTypes.string,
     }),
+    bookingData: PropTypes.array.isRequired,
 };
 
 export default ListingReservation

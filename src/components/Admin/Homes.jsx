@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Heading from '../Heading';
 import adminAxios from '../../Axios/adminAxios';
-
+import PropTypes from 'prop-types';
 const Homes = ({ title = "Verified Home List is Empty", subtitle = "." }) => {
     const [HomeDetails, setHomeDetails] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
@@ -126,5 +126,8 @@ const Homes = ({ title = "Verified Home List is Empty", subtitle = "." }) => {
         </div>
     );
 };
-
+Homes.propTypes = {
+    title: PropTypes.string,
+    subtitle: PropTypes.string,
+};
 export default Homes;

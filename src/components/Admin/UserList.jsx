@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import adminAxios from '../../Axios/adminAxios';
 import { toast } from 'react-toastify';
 import Heading from '../Heading';
-
+import PropTypes from 'prop-types';
 const UserList = ({
     title = "User List is Empty",
     subtitle = ".",
@@ -171,5 +171,8 @@ const UserList = ({
         </div >
     );
 };
-
+UserList.propTypes = {
+    title: PropTypes.string,
+    subtitle: PropTypes.string,
+};
 export default UserList;

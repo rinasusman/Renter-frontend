@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import useCategoryModal from '../../Hooks/useCategoryModal';
 import adminAxios from '../../Axios/adminAxios';
 import Heading from '../Heading';
-
+import PropTypes from 'prop-types';
 const Catogeriy = ({
     title = "Categories not found",
     subtitle = "Please add Categories.",
@@ -133,5 +133,8 @@ const Catogeriy = ({
         </div >
     );
 };
-
+Catogeriy.propTypes = {
+    title: PropTypes.string,
+    subtitle: PropTypes.string,
+};
 export default Catogeriy;

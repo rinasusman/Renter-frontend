@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Heading from '../Heading'
 import adminAxios from '../../Axios/adminAxios';
 import { toast } from 'react-toastify';
-
+import PropTypes from 'prop-types';
 const HomeVerification = ({
     title = "Home Verification List is Empty",
     subtitle = ".",
@@ -80,7 +80,7 @@ const HomeVerification = ({
                                     </thead>
                                     <tbody>
                                         {currentItems?.map((home, index) => (
-                                            <tr className="border-b dark:border-neutral-500" >
+                                            <tr className="border-b dark:border-neutral-500" key={home._id} >
                                                 <td className="whitespace-nowrap px-6 py-4 font-medium">
                                                     {index + 1}
                                                 </td>
@@ -144,5 +144,8 @@ const HomeVerification = ({
         </div >
     )
 }
-
+HomeVerification.propTypes = {
+    title: PropTypes.string,
+    subtitle: PropTypes.string,
+};
 export default HomeVerification

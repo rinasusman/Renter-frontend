@@ -20,7 +20,7 @@ const SideNav = () => {
 
   const adminlogoutHandler = async () => {
     try {
-      const res = await adminAxios.post('/adminlogout')
+      await adminAxios.post('/adminlogout')
       localStorage.removeItem('admintoken')
       toast.success('Logged out successfully')
       navigate('/admin')
