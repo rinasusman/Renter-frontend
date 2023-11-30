@@ -19,6 +19,8 @@ const Catogeriy = ({
             let response = await adminAxios.get('/getCategoryList');
             if (Array.isArray(response.data)) {
                 setCategoryDetails(response.data);
+            } else {
+                console.error('Response data is not an array:', response.data);
             }
         } catch (e) {
             console.log('error', e.message);
@@ -42,6 +44,15 @@ const Catogeriy = ({
         } else if (action === 'previous') {
             setCurrentPage(currentPage - 1);
         }
+    };
+    const handleList = async (CatId) => {
+        const response = await adminAxios.get(`/CategoryList/${CatId}`);
+        setCategoryDetails(response.data);
+    };
+
+    const handleUnList = async (CatId) => {
+        const response = await adminAxios.get(`/CategoryUnList/${CatId}`);
+        setCategoryDetails(response.data);
     };
 
     return (
@@ -71,7 +82,7 @@ const Catogeriy = ({
                                             <th scope="col" className="px-6 py-4">
                                                 DESCRIPTION
                                             </th>
-
+                                            <th scope="col" className="px-6 py-4">ACTION</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -84,7 +95,23 @@ const Catogeriy = ({
                                                 <td className="whitespace-nowrap text-black font-medium px-6 py-4">
                                                     {category.description}
                                                 </td>
-
+                                                <td className="whitespace-nowrap px-2 py-2">
+                                                    {category.isDeleted === true ? (
+                                                        <button
+                                                            className="bg-green-500 rounded-[3px] px-3 h-[20px] text-white cursor-pointer font-medium"
+                                                            onClick={() => handleList(category._id)}
+                                                        >
+                                                            LIST
+                                                        </button>
+                                                    ) : (
+                                                        <button
+                                                            className="bg-red-500 rounded-[3px] px-3 h-[20px] text-white cursor-pointer font-medium"
+                                                            onClick={() => handleUnList(category._id)}
+                                                        >
+                                                            UNLIST
+                                                        </button>
+                                                    )}
+                                                </td>
                                             </tr>
                                         ))}
                                     </tbody>

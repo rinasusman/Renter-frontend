@@ -63,7 +63,7 @@ const PanelManage = () => {
         totalBookings: 0,
     });
 
-
+    const [wallet, setWallet] = useState(0)
     useEffect(() => {
         const fetchEarnings = async () => {
             try {
@@ -79,7 +79,7 @@ const PanelManage = () => {
                 response.data.totalEarnings = parseFloat(response.data.totalEarnings)
                 setEarnings(response.data);
 
-
+                setWallet(response.data.userWallet)
                 const dailyBookingsResponse = await userAxios.get('/dailybook', { headers });
                 const dailyBookings = dailyBookingsResponse.data.dailyBookings;
                 if (!dailyBookings || !Array.isArray(dailyBookings) || dailyBookings.length === 0) {
@@ -205,6 +205,8 @@ const PanelManage = () => {
 
         fetchEarnings();
     }, []);
+
+
     return (
         <Container>
             <Heading
@@ -311,7 +313,7 @@ const PanelManage = () => {
                             text-[#5a5c69] 
                             mt-[5px]
                             '>
-                                0
+                                {wallet}
                             </h1>
                         </div>
                         <TbWallet fontSize={28} />

@@ -5,34 +5,32 @@ import Heading from '../../Heading'
 import PropTypes from 'prop-types';
 import TripCard from './TripCard';
 import userAxios from '../../../Axios/guestAxios';
+import Swal from 'sweetalert2';
 const Mytrips = ({
     title = "Booking List Empty",
     subtitle = "Please add your Booking", }) => {
     const [bookings, setBookings] = useState([]);
     const [activeTab, setActiveTab] = useState('Upcoming');
     console.log(bookings, "booking:::::::::::")
+    const fetchBookings = async () => {
+        try {
+            const tokens = localStorage.getItem('usertoken');
+
+            const headers = {
+                Authorization: `Bearer ${tokens}`,
+                'Content-Type': 'application/json',
+            };
+            const response = await userAxios.get('/getbookhome', { headers });
+            const data = response.data;
+            console.log(data, 'daa::::::');
+            setBookings(data);
+        } catch (error) {
+            console.error('Error fetching bookings:', error);
+        }
+    };
     useEffect(() => {
-
-        const fetchBookings = async () => {
-            try {
-                const tokens = localStorage.getItem('usertoken')
-
-                const headers = {
-                    'Authorization': `Bearer ${tokens}`,
-                    'Content-Type': 'application/json',
-                };
-                const response = await userAxios.get('/getbookhome', { headers });
-                const data = response.data;
-                console.log(data, "daa::::::")
-                setBookings(data);
-            } catch (error) {
-                console.error('Error fetching bookings:', error);
-            }
-        };
-
         fetchBookings();
     }, []);
-
     const upcomingBookings = bookings.filter((booking) => booking.status === 'Booked');
     const checkoutBookings = bookings.filter((booking) => booking.status === 'Checkout');
     const cancelledBookings = bookings.filter((booking) => booking.status === 'Cancelled');
@@ -47,7 +45,41 @@ const Mytrips = ({
     const handleTabClick = (tab) => {
         setActiveTab(tab);
     };
+    const handleCancelClick = async (bookingId) => {
+        // Show SweetAlert confirmation dialog
+        const result = await Swal.fire({
+            title: 'Are you sure?',
+            text: 'You won\'t be able to revert this!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, cancel it!',
+        });
 
+        // If the user clicks "Yes, cancel it!" in the SweetAlert dialog
+        if (result.isConfirmed) {
+            try {
+                const tokenss = localStorage.getItem('usertoken');
+                console.log(tokenss, "tokenss:::")
+                const headers = {
+                    Authorization: `Bearer ${tokenss}`,
+                    'Content-Type': 'application/json',
+                };
+                await userAxios.put(`/cancelbooking/${bookingId}`, {}, { headers });
+
+                // Refresh the bookings after cancellation
+                fetchBookings();
+
+                // Show success message
+                Swal.fire('Cancelled!', 'Your booking has been cancelled.', 'success');
+            } catch (error) {
+                console.error('Error cancelling booking:', error);
+                // Show error message
+                Swal.fire('Error', 'There was an error cancelling your booking.', 'error');
+            }
+        }
+    }
     return (
         <Container>
             <Heading
@@ -85,7 +117,7 @@ const Mytrips = ({
                 <div className="mt-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2 gap-8">
                     {filteredBookings[activeTab].length > 0 ? (
                         filteredBookings[activeTab].map((booking) => (
-                            <TripCard key={booking._id} booking={booking} activeTab={activeTab} />
+                            <TripCard key={booking._id} booking={booking} activeTab={activeTab} onCancelClick={() => handleCancelClick(booking._id)} />
                         ))
                     ) : (
                         <div

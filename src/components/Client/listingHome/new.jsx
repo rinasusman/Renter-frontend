@@ -1,26 +1,20 @@
-fill: {
-    type: 'image',
-        image: {
-        src: ['/path/to/image1.png', 'path/to/image2.jpg'],
-            width: undefined,  // optional
-                height: undefined  //optional
+
+
+
+const handleCancelClick = async (bookingId) => {
+    try {
+        const tokenss = localStorage.getItem('usertoken');
+        console.log(tokenss, "tokenss:::")
+        const headers = {
+            Authorization: `Bearer ${tokenss}`,
+            'Content-Type': 'application/json',
+        };
+        await userAxios.put(`/cancelbooking/${bookingId}`, {}, { headers });
+
+        // Refresh the bookings after cancellation
+        fetchBookings();
     }
-}
-
-
-
-
-options: {
-    chart: {
-        id: "basic-bar"
-    },
-    xaxis: {
-        categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999]
+    catch (error) {
+        console.error('Error cancelling booking:', error);
     }
-},
-series: [
-    {
-        name: "series-1",
-        data: [30, 40, 45, 50, 49, 60, 70, 91]
-    }
-]
+};

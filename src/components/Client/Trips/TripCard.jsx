@@ -5,7 +5,7 @@ import useFeedbackModal from '../../../Hooks/useFeedbackModal';
 import Button from '../../Button';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-const TripCard = ({ booking, activeTab }) => {
+const TripCard = ({ booking, activeTab, onCancelClick }) => {
 
 
     console.log(booking, "booking id:")
@@ -19,7 +19,7 @@ const TripCard = ({ booking, activeTab }) => {
             case 'Upcoming':
                 return (
                     <div className='w-1/2'>
-                        <Button key={booking?._id} label="Cancel" />
+                        <Button key={booking?._id} label="Cancel" onClick={onCancelClick} />
                     </div>
                 );
             case 'Checkout':
@@ -65,7 +65,7 @@ const TripCard = ({ booking, activeTab }) => {
 
             </div>
             <div className='flex flex-row items-center gap-5'>
-                {/* ... (existing code) */}
+
                 {renderButtons()}
             </div>
         </div>
@@ -84,5 +84,6 @@ TripCard.propTypes = {
         endDate: PropTypes.string,
     }),
     activeTab: PropTypes.string,
+    onCancelClick: PropTypes.func.isRequired,
 };
 export default TripCard

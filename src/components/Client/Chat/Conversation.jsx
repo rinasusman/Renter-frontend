@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 const Conversation = ({ data, currentUser }) => {
     console.log(currentUser, "usercurrent:")
     const [userData, setUserData] = useState(null)
+
     console.log(userData, "name:")
     const firstLetter = userData?.name ? userData?.name.charAt(0).toUpperCase() : "";
     console.log(firstLetter, "nnnnnnn")
@@ -54,7 +55,7 @@ const Conversation = ({ data, currentUser }) => {
                     '
                     >
                         <span className='font-semibold'>{userData?.name}</span>
-                        <span>Online</span>
+
                     </div>
                 </div>
             </div >

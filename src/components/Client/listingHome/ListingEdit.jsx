@@ -4,6 +4,7 @@ import Heading from '../../Heading'
 import { useLocation, useNavigate } from 'react-router-dom'
 import Button from '../../Button'
 import userAxios from "../../../Axios/guestAxios";
+import ImageUpload from '../inputs/ImageUpload'
 
 const ListingEdit = () => {
 
@@ -12,6 +13,7 @@ const ListingEdit = () => {
 
     const [title, setTitle] = useState(itemData.title);
     const [locations, setLocation] = useState(itemData.location);
+    const [imageSrc, setImageValue] = useState(itemData.imageSrc)
     const [guestCount, setGuestCount] = useState(itemData.guestCount);
     const [roomCount, setRoomCount] = useState(itemData.roomCount);
     const [bathroomCount, setBathroomCount] = useState(itemData.bathroomCount);
@@ -53,6 +55,7 @@ const ListingEdit = () => {
             await userAxios.put(`/edithomes/${itemData._id}`, {
                 title,
                 locations,
+                imageSrc,
                 guestCount,
                 roomCount,
                 bathroomCount,
@@ -205,13 +208,17 @@ const ListingEdit = () => {
                     <hr />
                     <div>Image:</div>
 
-                    <img
+                    {/* <img
                         className="
                         w-[350px] 
                         h-[350px]
                         "
                         src={itemData.imageSrc}
-                        alt="" />
+                        alt="" /> */}
+                    <ImageUpload
+                        onChange={(value) => setImageValue(value)}
+                        value={imageSrc}
+                    />
                     <hr />
                     <div>Preview Images:</div>
                     <div className="flex flex-wrap">

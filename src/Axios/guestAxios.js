@@ -8,31 +8,31 @@ const userAxios = axios.create({
 });
 
 
-// userAxios.interceptors.request.use(
-//     (config) => {
+userAxios.interceptors.request.use(
+    (config) => {
 
-//         const tokens = localStorage.getItem('usertoken');
-//         if (tokens) {
-//             config.headers.Authorization = `Bearer ${tokens}`;
-//         }
-//         return config;
-//     },
-//     (error) => {
+        const tokens = localStorage.getItem('usertoken');
+        if (tokens) {
+            config.headers.Authorization = `Bearer ${tokens}`;
+        }
+        return config;
+    },
+    (error) => {
 
-//         return Promise.reject(error);
-//     }
-// );
+        return Promise.reject(error);
+    }
+);
 
 
-// userAxios.interceptors.response.use(
-//     (response) => {
+userAxios.interceptors.response.use(
+    (response) => {
 
-//         return response;
-//     },
-//     (error) => {
+        return response;
+    },
+    (error) => {
 
-//         return Promise.reject(error);
-//     }
-// );
+        return Promise.reject(error);
+    }
+);
 
 export default userAxios;

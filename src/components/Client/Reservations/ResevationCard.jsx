@@ -57,7 +57,7 @@ const ResevationCard = ({ reservation }) => {
                         <option value="Booked">Booked</option>
                         <option value="Checkin">Checkin</option>
                         <option value="Checkout">Checkout</option>
-                        <option value="Cancel">Cancel</option>
+                        <option value="Cancelled">Cancel</option>
                     </select>
                 </div>
             </div>

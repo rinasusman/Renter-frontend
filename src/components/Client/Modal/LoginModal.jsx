@@ -1,9 +1,7 @@
 import React, { useCallback } from "react";
 
 import { FcGoogle } from "react-icons/fc";
-
 import { useForm } from "react-hook-form";
-
 
 import Heading from "../../Heading";
 import Button from "../../Button";
@@ -14,8 +12,6 @@ import useLoginModal from "../../../Hooks/useLoginModal";
 import { useDispatch } from "react-redux";
 import { useLoginMutation } from "../../../Redux/container/userApiSlice.js";
 import { setUserLogin } from "../../../Redux/container/userAuth.slice.js";
-
-
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import useEmailModal from "../../../Hooks/useEmailModal.js";
@@ -51,6 +47,9 @@ const LoginModal = () => {
       password: "",
     });
   }, [reset]);
+
+
+
 
 
   const onSubmit = async (data) => {
@@ -153,6 +152,7 @@ const LoginModal = () => {
     <div className="flex flex-col gap-4 mt-3">
       <hr />
       <Button outline label="Continue with Google" icon={FcGoogle} />
+
 
       <div className="text-neutral-500 text-center mt-4 font-light">
         <p>
